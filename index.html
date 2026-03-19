@@ -258,6 +258,36 @@ h2 {
 .map-overlay-card a { font-size: 0.82rem; font-weight: 600; color: var(--blue); }
 @media(max-width:480px){ .map-overlay-card { top: 12px; left: 12px; padding: 14px 16px; max-width: 200px; } }
 
+/* ── Chat teaser bubble ── */
+#chat-teaser {
+  position: fixed; bottom: 90px; right: 24px; z-index: 997;
+  background: #fff; color: var(--ink);
+  border-radius: 20px 20px 4px 20px;
+  padding: 11px 16px 11px 14px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+  font-size: 0.83rem; font-weight: 500; line-height: 1.4;
+  max-width: 240px; cursor: pointer;
+  display: none; align-items: center; gap: 8px;
+  animation: teaser-in 0.3s ease;
+}
+#chat-teaser.show { display: flex; }
+#chat-teaser-close {
+  margin-left: auto; flex-shrink: 0; background: none; border: none;
+  color: #aaa; font-size: 1rem; cursor: pointer; line-height: 1; padding: 0 0 0 4px;
+}
+#chat-badge {
+  position: absolute; top: -4px; right: -4px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #e53935; color: #fff;
+  font-size: 0.65rem; font-weight: 700;
+  display: none; align-items: center; justify-content: center;
+}
+#chat-badge.show { display: flex; }
+@keyframes teaser-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* ── Chatbot ── */
 #chat-fab {
   position: fixed; bottom: 24px; right: 24px; z-index: 999;
@@ -612,8 +642,17 @@ footer {
   </div>
 </div>
 
+<!-- Chat teaser -->
+<div id="chat-teaser" onclick="teaserOpen()">
+  <span id="chat-teaser-text">👋 Come check us out — tours available daily!</span>
+  <button id="chat-teaser-close" onclick="teaserDismiss(event)" aria-label="Dismiss">×</button>
+</div>
+
 <!-- Chatbot FAB -->
-<button id="chat-fab" aria-label="Chat with us" onclick="toggleChat()">💬</button>
+<button id="chat-fab" aria-label="Chat with us" onclick="toggleChat()" style="position:relative">
+  💬
+  <span id="chat-badge">1</span>
+</button>
 
 <div id="chat-panel" role="dialog" aria-label="Chat assistant">
   <div class="chat-head">
@@ -640,7 +679,54 @@ footer {
 
 <script>
 // ── Chatbot ──
-const APPLY_URL = 'APPLY_NOW_URL'; // ← replace with real Apply Now link
+const APPLY_URL = 'APPLY_NOW_URL';           // ← swap in real apply link
+const ZAPIER_CHAT_WEBHOOK = 'ZAPIER_CHAT_URL'; // ← swap in Zapier catch-hook URL
+
+// Proactive teaser messages — rotate every 7s, show after 5s page load
+const TEASER_MSGS = [
+  "👋 Come check us out — tours available daily!",
+  "📞 Call (616) 737-8592 for more information",
+  "🏠 Sign up for a tour — takes 30 seconds",
+  "💬 Ask about our floor plans & pricing"
+];
+let teaserIdx = 0, teaserTimer = null, teaserDismissed = false;
+
+function startTeasers() {
+  if (teaserDismissed || chatOpen) return;
+  const el = document.getElementById('chat-teaser');
+  const txt = document.getElementById('chat-teaser-text');
+  const badge = document.getElementById('chat-badge');
+  txt.textContent = TEASER_MSGS[teaserIdx];
+  el.classList.add('show');
+  badge.classList.add('show');
+  teaserTimer = setInterval(() => {
+    if (teaserDismissed || chatOpen) { clearInterval(teaserTimer); return; }
+    teaserIdx = (teaserIdx + 1) % TEASER_MSGS.length;
+    el.classList.remove('show');
+    setTimeout(() => {
+      txt.textContent = TEASER_MSGS[teaserIdx];
+      el.classList.add('show');
+    }, 300);
+  }, 7000);
+}
+setTimeout(startTeasers, 5000);
+
+function teaserOpen() {
+  clearInterval(teaserTimer);
+  document.getElementById('chat-teaser').classList.remove('show');
+  toggleChat();
+}
+function teaserDismiss(e) {
+  e.stopPropagation();
+  clearInterval(teaserTimer);
+  teaserDismissed = true;
+  document.getElementById('chat-teaser').classList.remove('show');
+  document.getElementById('chat-badge').classList.remove('show');
+}
+
+// Lead capture state
+let chatLead = { name: '', phone: '', intent: '' };
+let captureStep = null; // null | 'name' | 'phone'
 
 const BOT_FLOWS = {
   start: {
@@ -651,15 +737,8 @@ const BOT_FLOWS = {
     msg: "We have 1, 2, and 3 bedroom units:\n\n• 1 BR — from $1,425/mo (834–934 sq ft)\n• 2 BR — call for pricing\n• 3 BR — up to $2,375/mo (up to 1,421 sq ft)\n\nAll units include in-unit washer/dryer, dishwasher, balcony or patio, and central A/C.",
     chips: ['Schedule a tour','Apply now','Back']
   },
-  'Schedule a tour': {
-    msg: "Tours are available Mon–Sat 9am–6pm and Sunday by appointment. Fill out our quick form and we'll confirm same day!",
-    chips: ['Open tour form','Call us','Apply now','Back']
-  },
-  'Apply now': {
-    msg: "Ready to make it home? Click below to start your application — it only takes a few minutes.",
-    chips: ['Start application','Schedule a tour','Back'],
-    applyChip: true
-  },
+  'Schedule a tour': { action: 'capture', intent: 'Tour Request' },
+  'Apply now':        { action: 'capture', intent: 'Application Inquiry' },
   'Pet policy': {
     msg: "Yes, we're pet friendly! 🐾 Please call us at (616) 737-8592 for details on breed restrictions, weight limits, and pet deposit.",
     chips: ['Call us','Schedule a tour','Back']
@@ -673,20 +752,23 @@ const BOT_FLOWS = {
     chips: ['Call us','Email us','Back']
   },
   'Open tour form': { action: 'scroll-contact' },
-  'Get directions': { action: 'directions' },
-  'Call us': { action: 'call' },
-  'Email us': { action: 'email' },
-  'Start application': { action: 'apply' },
-  'Back': { action: 'back' }
+  'Get directions':  { action: 'directions' },
+  'Call us':         { action: 'call' },
+  'Email us':        { action: 'email' },
+  'Back':            { action: 'back' }
 };
 
-let chatOpen = false;
-let chatStarted = false;
+let chatOpen = false, chatStarted = false;
 
 function toggleChat() {
   chatOpen = !chatOpen;
   document.getElementById('chat-panel').classList.toggle('open', chatOpen);
-  if (chatOpen && !chatStarted) { chatStarted = true; setTimeout(() => botSay(BOT_FLOWS.start), 300); }
+  document.getElementById('chat-badge').classList.remove('show');
+  if (chatOpen) {
+    clearInterval(teaserTimer);
+    document.getElementById('chat-teaser').classList.remove('show');
+    if (!chatStarted) { chatStarted = true; setTimeout(() => botSay(BOT_FLOWS.start), 300); }
+  }
 }
 
 function botSay(flow) {
@@ -704,17 +786,12 @@ function botSay(flow) {
   (flow.chips || []).forEach(label => {
     const btn = document.createElement('button');
     btn.className = 'chip'; btn.textContent = label;
-    if (label === 'Start application' && APPLY_URL !== 'APPLY_NOW_URL') {
-      btn.onclick = () => window.open(APPLY_URL, '_blank');
-    } else {
-      btn.onclick = () => handleChip(label);
-    }
+    btn.onclick = () => handleChip(label);
     chips.appendChild(btn);
   });
 }
 
 function handleChip(label) {
-  // Echo user choice
   const body = document.getElementById('chat-body');
   const div = document.createElement('div');
   div.className = 'chat-msg user'; div.textContent = label;
@@ -723,20 +800,62 @@ function handleChip(label) {
   body.scrollTop = body.scrollHeight;
 
   const flow = BOT_FLOWS[label];
-  if (!flow) return;
+  if (!flow) { handleFreeText(label); return; }
+
   if (flow.action) {
-    if (flow.action === 'scroll-contact') { toggleChat(); document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
+    if (flow.action === 'capture') {
+      chatLead = { name: '', phone: '', intent: flow.intent };
+      captureStep = 'name';
+      setTimeout(() => botSay({ msg: `Great! I'd love to get you set up. What's your first name?` }), 400);
+    }
+    else if (flow.action === 'scroll-contact') { toggleChat(); document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
     else if (flow.action === 'directions') window.open('https://maps.google.com/?q=267+Seminole+Rd+Norton+Shores+MI+49444','_blank');
     else if (flow.action === 'call') window.location.href = 'tel:6167378592';
     else if (flow.action === 'email') window.location.href = 'mailto:info@fusionpropertiesllc.com';
-    else if (flow.action === 'apply') {
-      if (APPLY_URL !== 'APPLY_NOW_URL') window.open(APPLY_URL, '_blank');
-      else setTimeout(() => botSay({msg:"The application link is coming soon! In the meantime, give us a call at (616) 737-8592 or fill out the tour form.", chips:['Open tour form','Call us','Back']}), 400);
-    }
     else if (flow.action === 'back') setTimeout(() => botSay(BOT_FLOWS.start), 300);
     return;
   }
   setTimeout(() => botSay(flow), 400);
+}
+
+function handleFreeText(text) {
+  if (captureStep === 'name') {
+    chatLead.name = text;
+    captureStep = 'phone';
+    setTimeout(() => botSay({ msg: `Nice to meet you, ${text}! 👋 What's the best phone number to reach you?` }), 400);
+  } else if (captureStep === 'phone') {
+    chatLead.phone = text;
+    captureStep = null;
+    submitChatLead();
+  } else {
+    setTimeout(() => botSay({
+      msg: "Thanks for your message! For the fastest answer, give us a call at (616) 737-8592 or choose an option below.",
+      chips: ['Schedule a tour','Pricing & floor plans','Call us','Back']
+    }), 400);
+  }
+}
+
+async function submitChatLead() {
+  // Confirm to user immediately
+  botSay({ msg: `Perfect, ${chatLead.name}! ✅ We'll reach out to ${chatLead.phone} shortly to confirm your ${chatLead.intent.toLowerCase()}.\n\nYou can also call us anytime at (616) 737-8592.`, chips: ['Back to menu'] });
+  BOT_FLOWS['Back to menu'] = { action: 'back' };
+
+  // Fire Zapier
+  if (ZAPIER_CHAT_WEBHOOK !== 'ZAPIER_CHAT_URL') {
+    try {
+      await fetch(ZAPIER_CHAT_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'Mona Shores Flats — Chat Widget',
+          intent: chatLead.intent,
+          name: chatLead.name,
+          phone: chatLead.phone,
+          timestamp: new Date().toISOString()
+        })
+      });
+    } catch(e) { /* silent — lead confirmed to user, Zapier optional */ }
+  }
 }
 
 function sendMsg() {
@@ -744,15 +863,13 @@ function sendMsg() {
   const text = input.value.trim();
   if (!text) return;
   input.value = '';
-  handleChip(text) || (() => {
-    const body = document.getElementById('chat-body');
-    const div = document.createElement('div');
-    div.className = 'chat-msg user'; div.textContent = text; body.appendChild(div);
-    setTimeout(() => botSay({
-      msg: "Thanks for your message! For the fastest answer, give us a call at (616) 737-8592 or fill out the tour form.",
-      chips: ['Open tour form','Call us','Back']
-    }), 400);
-  })();
+  const body = document.getElementById('chat-body');
+  const div = document.createElement('div');
+  div.className = 'chat-msg user'; div.textContent = text;
+  body.appendChild(div);
+  document.getElementById('chat-chips').innerHTML = '';
+  body.scrollTop = body.scrollHeight;
+  handleFreeText(text);
 }
 
 // ── Nav scroll
