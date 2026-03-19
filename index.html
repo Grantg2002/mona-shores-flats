@@ -243,6 +243,78 @@ h2 {
 #success strong { display: block; font-size: 1rem; margin-bottom: 4px; }
 #success span { font-size: 0.85rem; color: var(--muted); }
 
+/* ── Map ── */
+.map-section { padding: 0; }
+.map-wrap { position: relative; height: 420px; }
+.map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+.map-overlay-card {
+  position: absolute; top: 28px; left: 28px; z-index: 2;
+  background: #fff; border-radius: 12px; padding: 20px 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.14);
+  max-width: 240px;
+}
+.map-overlay-card strong { display: block; font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+.map-overlay-card p { font-size: 0.82rem; color: var(--ink2); line-height: 1.5; margin-bottom: 12px; }
+.map-overlay-card a { font-size: 0.82rem; font-weight: 600; color: var(--blue); }
+@media(max-width:480px){ .map-overlay-card { top: 12px; left: 12px; padding: 14px 16px; max-width: 200px; } }
+
+/* ── Chatbot ── */
+#chat-fab {
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--blue); color: #fff; border: none;
+  box-shadow: 0 4px 16px rgba(26,95,168,0.45);
+  cursor: pointer; font-size: 1.4rem; display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+#chat-fab:hover { transform: scale(1.07); background: #174f8e; }
+#chat-panel {
+  position: fixed; bottom: 90px; right: 24px; z-index: 998;
+  width: 320px; max-height: 480px;
+  background: #fff; border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  display: none; flex-direction: column; overflow: hidden;
+}
+#chat-panel.open { display: flex; }
+.chat-head {
+  background: var(--blue); color: #fff;
+  padding: 16px 18px; display: flex; align-items: center; gap: 10px;
+}
+.chat-head-avatar {
+  width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+}
+.chat-head-text strong { display: block; font-size: 0.88rem; }
+.chat-head-text span { font-size: 0.73rem; opacity: 0.8; }
+.chat-close { margin-left: auto; background: none; border: none; color: #fff; cursor: pointer; font-size: 1.2rem; line-height: 1; }
+.chat-body { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.chat-msg {
+  max-width: 85%; padding: 10px 13px; border-radius: 12px;
+  font-size: 0.83rem; line-height: 1.5;
+}
+.chat-msg.bot { background: var(--bg); color: var(--ink); align-self: flex-start; border-bottom-left-radius: 3px; }
+.chat-msg.user { background: var(--blue); color: #fff; align-self: flex-end; border-bottom-right-radius: 3px; }
+.chat-chips { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 16px 14px; }
+.chip {
+  background: var(--blue-light); color: var(--blue);
+  border: 1px solid #c5d8f0; border-radius: 20px;
+  padding: 6px 13px; font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; transition: background 0.15s;
+}
+.chip:hover { background: #d5e6f7; }
+.chat-input-row { display: flex; border-top: 1px solid var(--rule); }
+.chat-input-row input {
+  flex: 1; border: none; padding: 12px 14px; font-size: 0.85rem;
+  font-family: inherit; outline: none; color: var(--ink);
+}
+.chat-input-row button {
+  background: var(--blue); color: #fff; border: none;
+  padding: 0 16px; cursor: pointer; font-size: 1rem;
+  transition: background 0.2s;
+}
+.chat-input-row button:hover { background: #174f8e; }
+@media(max-width:400px){ #chat-panel { width: calc(100vw - 32px); right: 16px; } }
+
 /* ── Footer ── */
 footer {
   background: #111; padding: 36px 40px;
@@ -522,6 +594,44 @@ footer {
   </div>
 </section>
 
+<!-- Map -->
+<div class="map-section">
+  <div class="map-wrap">
+    <iframe
+      src="https://maps.google.com/maps?q=267+Seminole+Rd,+Norton+Shores,+MI+49444&t=&z=14&ie=UTF8&iwloc=&output=embed"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Mona Shores Flats location map"
+    ></iframe>
+    <div class="map-overlay-card">
+      <strong>Mona Shores Flats</strong>
+      <p>267 Seminole Rd<br>Norton Shores, MI 49444<br>On Mona Lake</p>
+      <a href="https://maps.google.com/?q=267+Seminole+Rd+Norton+Shores+MI+49444" target="_blank" rel="noopener">Get Directions ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- Chatbot FAB -->
+<button id="chat-fab" aria-label="Chat with us" onclick="toggleChat()">💬</button>
+
+<div id="chat-panel" role="dialog" aria-label="Chat assistant">
+  <div class="chat-head">
+    <div class="chat-head-avatar">🏠</div>
+    <div class="chat-head-text">
+      <strong>Mona Shores Flats</strong>
+      <span>Typically replies in minutes</span>
+    </div>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Close chat">×</button>
+  </div>
+  <div class="chat-body" id="chat-body"></div>
+  <div class="chat-chips" id="chat-chips"></div>
+  <div class="chat-input-row">
+    <input id="chat-input" type="text" placeholder="Type a question…" onkeydown="if(event.key==='Enter')sendMsg()">
+    <button onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
 <!-- Footer -->
 <footer>
   <div class="f-name">Mona Shores Flats &nbsp;·&nbsp; Fusion Properties LLC</div>
@@ -529,7 +639,123 @@ footer {
 </footer>
 
 <script>
-// Nav scroll
+// ── Chatbot ──
+const APPLY_URL = 'APPLY_NOW_URL'; // ← replace with real Apply Now link
+
+const BOT_FLOWS = {
+  start: {
+    msg: "Hi there! 👋 I'm here to help you learn about Mona Shores Flats. What can I help you with?",
+    chips: ['Pricing & floor plans','Schedule a tour','Apply now','Pet policy','Location & parking','Talk to a person']
+  },
+  'Pricing & floor plans': {
+    msg: "We have 1, 2, and 3 bedroom units:\n\n• 1 BR — from $1,425/mo (834–934 sq ft)\n• 2 BR — call for pricing\n• 3 BR — up to $2,375/mo (up to 1,421 sq ft)\n\nAll units include in-unit washer/dryer, dishwasher, balcony or patio, and central A/C.",
+    chips: ['Schedule a tour','Apply now','Back']
+  },
+  'Schedule a tour': {
+    msg: "Tours are available Mon–Sat 9am–6pm and Sunday by appointment. Fill out our quick form and we'll confirm same day!",
+    chips: ['Open tour form','Call us','Apply now','Back']
+  },
+  'Apply now': {
+    msg: "Ready to make it home? Click below to start your application — it only takes a few minutes.",
+    chips: ['Start application','Schedule a tour','Back'],
+    applyChip: true
+  },
+  'Pet policy': {
+    msg: "Yes, we're pet friendly! 🐾 Please call us at (616) 737-8592 for details on breed restrictions, weight limits, and pet deposit.",
+    chips: ['Call us','Schedule a tour','Back']
+  },
+  'Location & parking': {
+    msg: "We're at 267 Seminole Rd, Norton Shores — right on Mona Lake, 5 minutes from downtown Muskegon. Detached garages are available to rent.",
+    chips: ['Get directions','Schedule a tour','Back']
+  },
+  'Talk to a person': {
+    msg: "Of course! You can reach us at:\n📞 (616) 737-8592\n✉️ info@fusionpropertiesllc.com\n\nWe're available Mon–Sat 9am–6pm.",
+    chips: ['Call us','Email us','Back']
+  },
+  'Open tour form': { action: 'scroll-contact' },
+  'Get directions': { action: 'directions' },
+  'Call us': { action: 'call' },
+  'Email us': { action: 'email' },
+  'Start application': { action: 'apply' },
+  'Back': { action: 'back' }
+};
+
+let chatOpen = false;
+let chatStarted = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chat-panel').classList.toggle('open', chatOpen);
+  if (chatOpen && !chatStarted) { chatStarted = true; setTimeout(() => botSay(BOT_FLOWS.start), 300); }
+}
+
+function botSay(flow) {
+  const body = document.getElementById('chat-body');
+  const chips = document.getElementById('chat-chips');
+  if (flow.msg) {
+    const div = document.createElement('div');
+    div.className = 'chat-msg bot';
+    div.style.whiteSpace = 'pre-line';
+    div.textContent = flow.msg;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+  chips.innerHTML = '';
+  (flow.chips || []).forEach(label => {
+    const btn = document.createElement('button');
+    btn.className = 'chip'; btn.textContent = label;
+    if (label === 'Start application' && APPLY_URL !== 'APPLY_NOW_URL') {
+      btn.onclick = () => window.open(APPLY_URL, '_blank');
+    } else {
+      btn.onclick = () => handleChip(label);
+    }
+    chips.appendChild(btn);
+  });
+}
+
+function handleChip(label) {
+  // Echo user choice
+  const body = document.getElementById('chat-body');
+  const div = document.createElement('div');
+  div.className = 'chat-msg user'; div.textContent = label;
+  body.appendChild(div);
+  document.getElementById('chat-chips').innerHTML = '';
+  body.scrollTop = body.scrollHeight;
+
+  const flow = BOT_FLOWS[label];
+  if (!flow) return;
+  if (flow.action) {
+    if (flow.action === 'scroll-contact') { toggleChat(); document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
+    else if (flow.action === 'directions') window.open('https://maps.google.com/?q=267+Seminole+Rd+Norton+Shores+MI+49444','_blank');
+    else if (flow.action === 'call') window.location.href = 'tel:6167378592';
+    else if (flow.action === 'email') window.location.href = 'mailto:info@fusionpropertiesllc.com';
+    else if (flow.action === 'apply') {
+      if (APPLY_URL !== 'APPLY_NOW_URL') window.open(APPLY_URL, '_blank');
+      else setTimeout(() => botSay({msg:"The application link is coming soon! In the meantime, give us a call at (616) 737-8592 or fill out the tour form.", chips:['Open tour form','Call us','Back']}), 400);
+    }
+    else if (flow.action === 'back') setTimeout(() => botSay(BOT_FLOWS.start), 300);
+    return;
+  }
+  setTimeout(() => botSay(flow), 400);
+}
+
+function sendMsg() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  handleChip(text) || (() => {
+    const body = document.getElementById('chat-body');
+    const div = document.createElement('div');
+    div.className = 'chat-msg user'; div.textContent = text; body.appendChild(div);
+    setTimeout(() => botSay({
+      msg: "Thanks for your message! For the fastest answer, give us a call at (616) 737-8592 or fill out the tour form.",
+      chips: ['Open tour form','Call us','Back']
+    }), 400);
+  })();
+}
+
+// ── Nav scroll
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('solid', window.scrollY > 50);
 }, { passive: true });
