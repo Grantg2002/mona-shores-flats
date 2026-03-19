@@ -709,7 +709,7 @@ footer {
 // ════════════════════════════════════════════════
 const APPLY_URL          = 'APPLY_NOW_URL';    // your online application link
 const ZAPIER_CHAT_WEBHOOK= 'ZAPIER_CHAT_URL';  // Zapier catch-hook for chat leads
-const GROQ_API_KEY       = '';                 // Groq key → console.groq.com (free)
+const AI_PROXY_URL       = 'https://msf-chat.YOURSUBDOMAIN.workers.dev'; // ← swap after Cloudflare deploy
 // ════════════════════════════════════════════════
 
 // Property knowledge — the AI reads this as its system prompt
@@ -837,12 +837,12 @@ function matchKeyword(text) {
 
 // ── Groq AI fallback ──
 async function askAI(userText) {
-  if (!GROQ_API_KEY) return null;
+  if (!AI_PROXY_URL || AI_PROXY_URL.includes('YOURSUBDOMAIN')) return null;
   aiHistory.push({ role: 'user', content: userText });
   try {
-    const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const resp = await fetch(AI_PROXY_URL, {
       method: 'POST',
-      headers: { 'Authorization': `Bearer ${GROQ_API_KEY}`, 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'llama-3.1-8b-instant',
         messages: [{ role: 'system', content: PROPERTY_KNOWLEDGE }, ...aiHistory],
