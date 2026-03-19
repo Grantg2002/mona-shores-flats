@@ -912,7 +912,7 @@ footer {
         </div>
         <div class="c-row">
           <div class="c-label">Email</div>
-          <div class="c-val"><a href="mailto:McKennaK@GolferGroup.com">McKennaK@GolferGroup.com</a></div>
+          <div class="c-val"><a href="mailto:makennak@gulkergroup.com">makennak@gulkergroup.com</a></div>
         </div>
         <div class="c-row">
           <div class="c-label">Hours</div>
@@ -1041,7 +1041,7 @@ Always be warm, helpful, and end with an encouraging call-to-action.
 PROPERTY FACTS:
 - Address: 267 Seminole Rd, Norton Shores, MI 49444 (5 min from downtown Muskegon)
 - Phone: (616) 737-8592 | Email: info@fusionpropertiesllc.com
-- Leasing contact: McKenna — McKennaK@GolferGroup.com | (616) 737-8592
+- Leasing contact: McKenna — makennak@gulkergroup.com | (616) 737-8592
 - Hours: Mon–Sat 9am–6pm, Sun by appointment
 - Built 2025 (brand new, no maintenance surprises)
 - Short walk from Mona Lake — 695 acres, connected to Lake Michigan. Not directly on the water but very close, steps from Mona Lake Park.
@@ -1063,7 +1063,7 @@ walk-in closet. Detached garages available separately.
 NEARBY EMPLOYERS: Mercy Health, Howmet Aerospace, Muskegon County Airport area.
 
 If someone asks to tour or apply, ask for their first name and phone number so the team can follow up.
-If someone wants to speak with a person or needs help beyond general questions, direct them to McKenna at McKennaK@GolferGroup.com or (616) 737-8592.
+If someone wants to speak with a person or needs help beyond general questions, direct them to McKenna at makennak@gulkergroup.com or (616) 737-8592.
 `;
 
 // conversation history for AI context window
@@ -1131,7 +1131,7 @@ const BOT_FLOWS = {
     chips: ['Call us','Schedule a tour','Back']
   },
   'Talk to someone': {
-    msg: "Absolutely! Reach out to McKenna — she handles leasing and can answer all your questions.\n\n📞 (616) 737-8592\n✉️ McKennaK@GolferGroup.com\n\nMon–Sat 9am–6pm · Sun by appointment",
+    msg: "Absolutely! Reach out to McKenna — she handles leasing and can answer all your questions.\n\n📞 (616) 737-8592\n✉️ makennak@gulkergroup.com\n\nMon–Sat 9am–6pm · Sun by appointment",
     chips: ['Call us','Email McKenna','Back']
   },
   'Get directions':  { action: 'directions' },
@@ -1236,7 +1236,7 @@ function runAction(flow) {
   else if (flow.action === 'directions') window.open('https://maps.google.com/?q=267+Seminole+Rd+Norton+Shores+MI+49444','_blank');
   else if (flow.action === 'call')       window.location.href = 'tel:6167378592';
   else if (flow.action === 'email')      window.location.href = 'mailto:info@fusionpropertiesllc.com';
-  else if (flow.action === 'emailMcKenna') window.location.href = 'mailto:McKennaK@GolferGroup.com';
+  else if (flow.action === 'emailMcKenna') window.location.href = 'mailto:makennak@gulkergroup.com';
 }
 
 // ── Handle free-text input ──
