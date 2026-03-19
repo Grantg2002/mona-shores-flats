@@ -12,6 +12,22 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+
+/* ── Promo bar ── */
+#promo-bar {
+  background: linear-gradient(90deg, #1a5fa8 0%, #1e78d4 100%);
+  color: #fff; text-align: center; padding: 10px 48px 10px 16px;
+  font-size: 0.82rem; font-weight: 500; position: relative; z-index: 101;
+  letter-spacing: 0.01em;
+}
+#promo-bar strong { font-weight: 800; }
+#promo-bar a { color: #fff; text-decoration: underline; margin-left: 10px; font-weight: 700; white-space: nowrap; }
+#promo-close {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: rgba(255,255,255,0.7); font-size: 1.1rem;
+  cursor: pointer; line-height: 1; padding: 4px;
+}
+#promo-close:hover { color: #fff; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   color: #1a1a1a; background: #fff;
@@ -364,6 +380,13 @@ footer {
 </head>
 <body>
 
+<!-- Promo bar -->
+<div id="promo-bar">
+  🎉 <strong>First Month Free</strong> — Sign your lease before April 1st. Limited units remaining.
+  <a href="#contact">Claim this offer →</a>
+  <button id="promo-close" onclick="this.parentElement.style.display='none'" aria-label="Dismiss">×</button>
+</div>
+
 <nav id="nav">
   <div class="logo">Mona Shores Flats</div>
   <div class="nav-right">
@@ -385,12 +408,15 @@ footer {
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-text">
-    <div class="hero-tag">Now Leasing · Muskegon Area</div>
-    <h1>The nicest apartments<br>near Muskegon.</h1>
-    <p>Brand-new on Mona Lake. Mona Shores schools. In-unit laundry. Starting at $1,425.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+      <div class="hero-tag" style="margin-bottom:0">Now Leasing · Muskegon Area</div>
+      <div class="hero-tag" style="margin-bottom:0;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.4)">🎉 First Month Free — Sign before April 1st</div>
+    </div>
+    <h1>Come home to<br>Mona Lake.</h1>
+    <p>Brand-new apartments steps from the water. Mona Shores schools, in-unit laundry, private balcony — everything included from $1,425/mo.</p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">Schedule a Tour</a>
-      <a href="tel:6167378592" class="btn-ghost">Call (616) 737-8592</a>
+      <a href="tel:6167378592" class="btn-ghost">📞 (616) 737-8592</a>
     </div>
   </div>
 </section>
@@ -398,9 +424,9 @@ footer {
 <!-- Stats -->
 <div class="stats">
   <div class="stat"><div class="stat-n">2025</div><div class="stat-l">New Construction</div></div>
-  <div class="stat"><div class="stat-n">120</div><div class="stat-l">Total Units</div></div>
-  <div class="stat"><div class="stat-n">$1,425</div><div class="stat-l">Starting From</div></div>
-  <div class="stat"><div class="stat-n">1–3 BR</div><div class="stat-l">Floor Plans</div></div>
+  <div class="stat"><div class="stat-n">$1,425</div><div class="stat-l">Starting From / mo</div></div>
+  <div class="stat"><div class="stat-n" style="color:#4fc3f7">1 Mo Free</div><div class="stat-l">Sign Before Apr 1st</div></div>
+  <div class="stat"><div class="stat-n">1–3 BR</div><div class="stat-l">Floor Plans Available</div></div>
 </div>
 
 <!-- Why here -->
@@ -678,16 +704,55 @@ footer {
 </footer>
 
 <script>
-// ── Chatbot ──
-const APPLY_URL = 'APPLY_NOW_URL';           // ← swap in real apply link
-const ZAPIER_CHAT_WEBHOOK = 'ZAPIER_CHAT_URL'; // ← swap in Zapier catch-hook URL
+// ════════════════════════════════════════════════
+// CONFIG — swap these three values to go live
+// ════════════════════════════════════════════════
+const APPLY_URL          = 'APPLY_NOW_URL';    // your online application link
+const ZAPIER_CHAT_WEBHOOK= 'ZAPIER_CHAT_URL';  // Zapier catch-hook for chat leads
+const GROQ_API_KEY       = '';                 // Groq key → console.groq.com (free)
+// ════════════════════════════════════════════════
 
-// Proactive teaser messages — rotate every 7s, show after 5s page load
+// Property knowledge — the AI reads this as its system prompt
+const PROPERTY_KNOWLEDGE = `
+You are the friendly leasing assistant for Mona Shores Flats. Keep replies under 3 sentences.
+Always be warm, helpful, and end with an encouraging call-to-action.
+
+PROPERTY FACTS:
+- Address: 267 Seminole Rd, Norton Shores, MI 49444 (5 min from downtown Muskegon)
+- Phone: (616) 737-8592 | Email: info@fusionpropertiesllc.com
+- Hours: Mon–Sat 9am–6pm, Sun by appointment
+- Built 2025 (brand new, no maintenance surprises)
+- Situated on Mona Lake — 695 acres, connected to Lake Michigan
+- Mona Shores School District (top-rated in West Michigan)
+- 120 total units, pet friendly
+
+CURRENT SPECIAL 🎉:
+First month FREE when you sign a lease before April 1st, 2026. Limited units. Always mention this.
+
+FLOOR PLANS & PRICING:
+- 1 Bedroom: from $1,425/mo · 834–934 sq ft
+- 2 Bedroom: call for pricing
+- 3 Bedroom: up to $2,375/mo · up to 1,421 sq ft
+
+EVERY UNIT INCLUDES:
+In-unit washer/dryer, dishwasher, private balcony or patio, central A/C, modern 2025 appliances,
+walk-in closet. Detached garages available separately.
+
+NEARBY EMPLOYERS: Mercy Health, Howmet Aerospace, Muskegon County Airport area.
+
+If someone asks to tour or apply, ask for their first name and phone number so the team can follow up.
+`;
+
+// conversation history for AI context window
+let aiHistory = [];
+
+// ── Teaser bubbles ──
 const TEASER_MSGS = [
+  "🎉 First month free — sign before April 1st!",
   "👋 Come check us out — tours available daily!",
   "📞 Call (616) 737-8592 for more information",
   "🏠 Sign up for a tour — takes 30 seconds",
-  "💬 Ask about our floor plans & pricing"
+  "💬 Ask about floor plans & pricing"
 ];
 let teaserIdx = 0, teaserTimer = null, teaserDismissed = false;
 
@@ -695,69 +760,105 @@ function startTeasers() {
   if (teaserDismissed || chatOpen) return;
   const el = document.getElementById('chat-teaser');
   const txt = document.getElementById('chat-teaser-text');
-  const badge = document.getElementById('chat-badge');
-  txt.textContent = TEASER_MSGS[teaserIdx];
+  document.getElementById('chat-badge').classList.add('show');
+  txt.textContent = TEASER_MSGS[0];
   el.classList.add('show');
-  badge.classList.add('show');
   teaserTimer = setInterval(() => {
     if (teaserDismissed || chatOpen) { clearInterval(teaserTimer); return; }
     teaserIdx = (teaserIdx + 1) % TEASER_MSGS.length;
     el.classList.remove('show');
-    setTimeout(() => {
-      txt.textContent = TEASER_MSGS[teaserIdx];
-      el.classList.add('show');
-    }, 300);
+    setTimeout(() => { txt.textContent = TEASER_MSGS[teaserIdx]; el.classList.add('show'); }, 300);
   }, 7000);
 }
 setTimeout(startTeasers, 5000);
 
 function teaserOpen() {
-  clearInterval(teaserTimer);
+  clearInterval(teaserTimer); teaserDismissed = true;
   document.getElementById('chat-teaser').classList.remove('show');
   toggleChat();
 }
 function teaserDismiss(e) {
-  e.stopPropagation();
-  clearInterval(teaserTimer);
-  teaserDismissed = true;
+  e.stopPropagation(); clearInterval(teaserTimer); teaserDismissed = true;
   document.getElementById('chat-teaser').classList.remove('show');
   document.getElementById('chat-badge').classList.remove('show');
 }
 
-// Lead capture state
+// ── Lead capture state ──
 let chatLead = { name: '', phone: '', intent: '' };
-let captureStep = null; // null | 'name' | 'phone'
+let captureStep = null;
 
+// ── Scripted flows ──
 const BOT_FLOWS = {
   start: {
-    msg: "Hi there! 👋 I'm here to help you learn about Mona Shores Flats. What can I help you with?",
-    chips: ['Pricing & floor plans','Schedule a tour','Apply now','Pet policy','Location & parking','Talk to a person']
+    msg: "Hi there! 👋 Welcome to Mona Shores Flats. How can I help you today?",
+    chips: ['Pricing & availability','Current specials 🎉','Schedule a tour','Apply now','Pets & parking','Talk to someone']
   },
-  'Pricing & floor plans': {
-    msg: "We have 1, 2, and 3 bedroom units:\n\n• 1 BR — from $1,425/mo (834–934 sq ft)\n• 2 BR — call for pricing\n• 3 BR — up to $2,375/mo (up to 1,421 sq ft)\n\nAll units include in-unit washer/dryer, dishwasher, balcony or patio, and central A/C.",
-    chips: ['Schedule a tour','Apply now','Back']
+  'Pricing & availability': {
+    msg: "Here's what we have:\n\n• 1 BR — from $1,425/mo · 834–934 sq ft\n• 2 BR — call for pricing\n• 3 BR — up to $2,375/mo · up to 1,421 sq ft\n\nAll units: in-unit W/D, dishwasher, private balcony, A/C. 🎉 First month free if you sign before April 1st!",
+    chips: ['Current specials 🎉','Schedule a tour','Apply now','Back']
+  },
+  'Current specials 🎉': {
+    msg: "🎉 Right now: your FIRST MONTH IS FREE when you sign a lease before April 1st, 2026.\n\nLimited units remaining — this won't last long. Want to lock in your floor plan?",
+    chips: ['Schedule a tour','Apply now','Pricing & availability','Back']
   },
   'Schedule a tour': { action: 'capture', intent: 'Tour Request' },
-  'Apply now':        { action: 'capture', intent: 'Application Inquiry' },
-  'Pet policy': {
-    msg: "Yes, we're pet friendly! 🐾 Please call us at (616) 737-8592 for details on breed restrictions, weight limits, and pet deposit.",
+  'Apply now':       { action: 'capture', intent: 'Application Inquiry' },
+  'Pets & parking': {
+    msg: "Yes, we're pet friendly! 🐾 Detached garages are also available to rent.\n\nCall (616) 737-8592 for details on pet breed/weight restrictions and deposit.",
     chips: ['Call us','Schedule a tour','Back']
   },
-  'Location & parking': {
-    msg: "We're at 267 Seminole Rd, Norton Shores — right on Mona Lake, 5 minutes from downtown Muskegon. Detached garages are available to rent.",
-    chips: ['Get directions','Schedule a tour','Back']
-  },
-  'Talk to a person': {
-    msg: "Of course! You can reach us at:\n📞 (616) 737-8592\n✉️ info@fusionpropertiesllc.com\n\nWe're available Mon–Sat 9am–6pm.",
+  'Talk to someone': {
+    msg: "Of course!\n📞 (616) 737-8592\n✉️ info@fusionpropertiesllc.com\n\nMon–Sat 9am–6pm · Sun by appointment",
     chips: ['Call us','Email us','Back']
   },
-  'Open tour form': { action: 'scroll-contact' },
   'Get directions':  { action: 'directions' },
   'Call us':         { action: 'call' },
   'Email us':        { action: 'email' },
-  'Back':            { action: 'back' }
+  'Back':            { action: 'back' },
+  'Back to menu':    { action: 'back' }
 };
 
+// ── Keyword → flow mapping (handles free-text like "price", "how much", "tour") ──
+const KEYWORDS = [
+  { re: /price|pricing|cost|how much|rent|rate|afford|cheap|expensive|\$|1 bed|2 bed|3 bed|bedroom|sqft|sq ft/i, flow: 'Pricing & availability' },
+  { re: /special|deal|promo|discount|free|offer|promotion|incentive|first month/i,               flow: 'Current specials 🎉' },
+  { re: /tour|visit|showing|see it|come in|schedule|appointment|viewing/i,                        flow: 'Schedule a tour' },
+  { re: /apply|application|move in|moving|lease|sign|rent it/i,                                   flow: 'Apply now' },
+  { re: /pet|dog|cat|animal|breed|fur/i,                                                           flow: 'Pets & parking' },
+  { re: /park|garage|car|vehicle/i,                                                                flow: 'Pets & parking' },
+  { re: /where|location|address|map|directions|get there|how far|muskegon|norton shores/i,        flow: 'Pricing & availability' },
+  { re: /person|human|agent|staff|talk|call|phone|contact|help/i,                                 flow: 'Talk to someone' },
+];
+
+function matchKeyword(text) {
+  for (const k of KEYWORDS) { if (k.re.test(text)) return k.flow; }
+  return null;
+}
+
+// ── Groq AI fallback ──
+async function askAI(userText) {
+  if (!GROQ_API_KEY) return null;
+  aiHistory.push({ role: 'user', content: userText });
+  try {
+    const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${GROQ_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'llama-3.1-8b-instant',
+        messages: [{ role: 'system', content: PROPERTY_KNOWLEDGE }, ...aiHistory],
+        max_tokens: 200, temperature: 0.7
+      })
+    });
+    if (!resp.ok) return null;
+    const data = await resp.json();
+    const reply = data.choices?.[0]?.message?.content || null;
+    if (reply) aiHistory.push({ role: 'assistant', content: reply });
+    if (aiHistory.length > 12) aiHistory = aiHistory.slice(-12); // keep last 6 turns
+    return reply;
+  } catch(e) { return null; }
+}
+
+// ── Chat open/close ──
 let chatOpen = false, chatStarted = false;
 
 function toggleChat() {
@@ -765,25 +866,26 @@ function toggleChat() {
   document.getElementById('chat-panel').classList.toggle('open', chatOpen);
   document.getElementById('chat-badge').classList.remove('show');
   if (chatOpen) {
-    clearInterval(teaserTimer);
+    clearInterval(teaserTimer); teaserDismissed = true;
     document.getElementById('chat-teaser').classList.remove('show');
     if (!chatStarted) { chatStarted = true; setTimeout(() => botSay(BOT_FLOWS.start), 300); }
   }
 }
 
-function botSay(flow) {
+// ── Render bot message ──
+function botSay(flow, aiText) {
   const body = document.getElementById('chat-body');
   const chips = document.getElementById('chat-chips');
-  if (flow.msg) {
+  const msg = aiText || flow.msg;
+  if (msg) {
     const div = document.createElement('div');
-    div.className = 'chat-msg bot';
-    div.style.whiteSpace = 'pre-line';
-    div.textContent = flow.msg;
-    body.appendChild(div);
-    body.scrollTop = body.scrollHeight;
+    div.className = 'chat-msg bot'; div.style.whiteSpace = 'pre-line';
+    div.textContent = msg;
+    body.appendChild(div); body.scrollTop = body.scrollHeight;
   }
   chips.innerHTML = '';
-  (flow.chips || []).forEach(label => {
+  const chipList = flow.chips || (aiText ? ['Schedule a tour','Pricing & availability','Current specials 🎉','Back'] : []);
+  chipList.forEach(label => {
     const btn = document.createElement('button');
     btn.className = 'chip'; btn.textContent = label;
     btn.onclick = () => handleChip(label);
@@ -791,85 +893,101 @@ function botSay(flow) {
   });
 }
 
+// ── Handle chip tap ──
 function handleChip(label) {
-  const body = document.getElementById('chat-body');
-  const div = document.createElement('div');
-  div.className = 'chat-msg user'; div.textContent = label;
-  body.appendChild(div);
-  document.getElementById('chat-chips').innerHTML = '';
-  body.scrollTop = body.scrollHeight;
-
+  addUserMsg(label);
   const flow = BOT_FLOWS[label];
   if (!flow) { handleFreeText(label); return; }
-
-  if (flow.action) {
-    if (flow.action === 'capture') {
-      chatLead = { name: '', phone: '', intent: flow.intent };
-      captureStep = 'name';
-      setTimeout(() => botSay({ msg: `Great! I'd love to get you set up. What's your first name?` }), 400);
-    }
-    else if (flow.action === 'scroll-contact') { toggleChat(); document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
-    else if (flow.action === 'directions') window.open('https://maps.google.com/?q=267+Seminole+Rd+Norton+Shores+MI+49444','_blank');
-    else if (flow.action === 'call') window.location.href = 'tel:6167378592';
-    else if (flow.action === 'email') window.location.href = 'mailto:info@fusionpropertiesllc.com';
-    else if (flow.action === 'back') setTimeout(() => botSay(BOT_FLOWS.start), 300);
-    return;
-  }
+  if (flow.action) { runAction(flow); return; }
   setTimeout(() => botSay(flow), 400);
 }
 
-function handleFreeText(text) {
-  if (captureStep === 'name') {
-    chatLead.name = text;
-    captureStep = 'phone';
-    setTimeout(() => botSay({ msg: `Nice to meet you, ${text}! 👋 What's the best phone number to reach you?` }), 400);
-  } else if (captureStep === 'phone') {
-    chatLead.phone = text;
-    captureStep = null;
-    submitChatLead();
-  } else {
-    setTimeout(() => botSay({
-      msg: "Thanks for your message! For the fastest answer, give us a call at (616) 737-8592 or choose an option below.",
-      chips: ['Schedule a tour','Pricing & floor plans','Call us','Back']
-    }), 400);
+function runAction(flow) {
+  if (flow.action === 'capture') {
+    chatLead = { name: '', phone: '', intent: flow.intent };
+    captureStep = 'name';
+    setTimeout(() => botSay({ msg: `Awesome! What's your first name?` }), 400);
   }
+  else if (flow.action === 'back')       setTimeout(() => botSay(BOT_FLOWS.start), 300);
+  else if (flow.action === 'directions') window.open('https://maps.google.com/?q=267+Seminole+Rd+Norton+Shores+MI+49444','_blank');
+  else if (flow.action === 'call')       window.location.href = 'tel:6167378592';
+  else if (flow.action === 'email')      window.location.href = 'mailto:info@fusionpropertiesllc.com';
 }
 
-async function submitChatLead() {
-  // Confirm to user immediately
-  botSay({ msg: `Perfect, ${chatLead.name}! ✅ We'll reach out to ${chatLead.phone} shortly to confirm your ${chatLead.intent.toLowerCase()}.\n\nYou can also call us anytime at (616) 737-8592.`, chips: ['Back to menu'] });
-  BOT_FLOWS['Back to menu'] = { action: 'back' };
+// ── Handle free-text input ──
+async function handleFreeText(text) {
+  if (captureStep === 'name') {
+    chatLead.name = text; captureStep = 'phone';
+    setTimeout(() => botSay({ msg: `Nice to meet you, ${text}! 👋 What's the best number to reach you?` }), 400);
+    return;
+  }
+  if (captureStep === 'phone') {
+    chatLead.phone = text; captureStep = null;
+    submitChatLead(); return;
+  }
 
-  // Fire Zapier
+  // 1. Keyword match
+  const kwFlow = matchKeyword(text);
+  if (kwFlow) { handleChip(kwFlow); return; }
+
+  // 2. AI (Groq) if key is set
+  showTyping();
+  const aiReply = await askAI(text);
+  hideTyping();
+  if (aiReply) { botSay({}, aiReply); return; }
+
+  // 3. Fallback
+  botSay({
+    msg: "Good question! For the most accurate answer, give us a call at (616) 737-8592 — or choose an option below.",
+    chips: ['Pricing & availability','Current specials 🎉','Schedule a tour','Call us']
+  });
+}
+
+function showTyping() {
+  const body = document.getElementById('chat-body');
+  const d = document.createElement('div');
+  d.id = 'chat-typing'; d.className = 'chat-msg bot';
+  d.style.cssText = 'color:#aaa;font-style:italic;font-size:0.78rem';
+  d.textContent = 'Typing…';
+  body.appendChild(d); body.scrollTop = body.scrollHeight;
+}
+function hideTyping() {
+  document.getElementById('chat-typing')?.remove();
+}
+
+// ── Submit lead to Zapier ──
+async function submitChatLead() {
+  botSay({ msg: `Perfect, ${chatLead.name}! ✅ We'll call ${chatLead.phone} shortly to confirm your ${chatLead.intent.toLowerCase()}.\n\nRemember: first month free if you sign before April 1st! 🎉`, chips: ['Back to menu'] });
   if (ZAPIER_CHAT_WEBHOOK !== 'ZAPIER_CHAT_URL') {
     try {
       await fetch(ZAPIER_CHAT_WEBHOOK, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          source: 'Mona Shores Flats — Chat Widget',
-          intent: chatLead.intent,
-          name: chatLead.name,
-          phone: chatLead.phone,
-          timestamp: new Date().toISOString()
+          source: 'Mona Shores Flats — Chat', intent: chatLead.intent,
+          name: chatLead.name, phone: chatLead.phone, timestamp: new Date().toISOString()
         })
       });
-    } catch(e) { /* silent — lead confirmed to user, Zapier optional */ }
+    } catch(e) {}
   }
 }
 
+// ── Send typed message ──
 function sendMsg() {
   const input = document.getElementById('chat-input');
-  const text = input.value.trim();
-  if (!text) return;
+  const text = input.value.trim(); if (!text) return;
   input.value = '';
+  addUserMsg(text);
+  handleFreeText(text);
+}
+
+function addUserMsg(text) {
   const body = document.getElementById('chat-body');
-  const div = document.createElement('div');
-  div.className = 'chat-msg user'; div.textContent = text;
-  body.appendChild(div);
+  const d = document.createElement('div');
+  d.className = 'chat-msg user'; d.textContent = text;
+  body.appendChild(d);
   document.getElementById('chat-chips').innerHTML = '';
   body.scrollTop = body.scrollHeight;
-  handleFreeText(text);
 }
 
 // ── Nav scroll
