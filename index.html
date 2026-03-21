@@ -1028,9 +1028,9 @@ footer {
 // ════════════════════════════════════════════════
 // CONFIG — swap these three values to go live
 // ════════════════════════════════════════════════
-const APPLY_URL          = 'APPLY_NOW_URL';    // your online application link
-const ZAPIER_CHAT_WEBHOOK= 'ZAPIER_CHAT_URL';  // Zapier catch-hook for chat leads
-const AI_PROXY_URL       = 'https://msf-chat.YOURSUBDOMAIN.workers.dev'; // ← swap after Cloudflare deploy
+const APPLY_URL    = 'https://monashoresflats.securecafe.com/onlineleasing/mona-shores-flats/guestlogin.aspx?';
+const LEAD_ENDPOINT= 'https://larbpeheccgzaejtiaiv.supabase.co/functions/v1/submit-msf-lead'; // Supabase Edge Function
+const AI_PROXY_URL = 'https://msf-chat.YOURSUBDOMAIN.workers.dev'; // ← swap after Cloudflare deploy
 // ════════════════════════════════════════════════
 
 // Property knowledge — the AI reads this as its system prompt
@@ -1098,6 +1098,7 @@ setTimeout(startTeasers, 5000);
 function teaserOpen() {
   clearInterval(teaserTimer); teaserDismissed = true;
   document.getElementById('chat-teaser').classList.remove('show');
+  chatEntry = 'teaser:' + TEASER_MSGS[teaserIdx];
   toggleChat();
 }
 function teaserDismiss(e) {
@@ -1107,8 +1108,9 @@ function teaserDismiss(e) {
 }
 
 // ── Lead capture state ──
-let chatLead = { name: '', phone: '', intent: '' };
+let chatLead = { name: '', phone: '', email: '', intent: '' };
 let captureStep = null;
+let chatEntry = ''; // tracks which teaser/keyword got them into the chat
 
 // ── Scripted flows ──
 const BOT_FLOWS = {
@@ -1155,7 +1157,12 @@ const KEYWORDS = [
 ];
 
 function matchKeyword(text) {
-  for (const k of KEYWORDS) { if (k.re.test(text)) return k.flow; }
+  for (const k of KEYWORDS) {
+    if (k.re.test(text)) {
+      if (!chatEntry) chatEntry = 'keyword:' + text.slice(0, 40);
+      return k.flow;
+    }
+  }
   return null;
 }
 
@@ -1228,7 +1235,7 @@ function handleChip(label) {
 
 function runAction(flow) {
   if (flow.action === 'capture') {
-    chatLead = { name: '', phone: '', intent: flow.intent };
+    chatLead = { name: '', phone: '', email: '', intent: flow.intent };
     captureStep = 'name';
     setTimeout(() => botSay({ msg: `Awesome! What's your first name?` }), 400);
   }
@@ -1247,7 +1254,12 @@ async function handleFreeText(text) {
     return;
   }
   if (captureStep === 'phone') {
-    chatLead.phone = text; captureStep = null;
+    chatLead.phone = text; captureStep = 'email';
+    setTimeout(() => botSay({ msg: `Got it! And what's your email so we can send you details and availability?` }), 400);
+    return;
+  }
+  if (captureStep === 'email') {
+    chatLead.email = text; captureStep = null;
     submitChatLead(); return;
   }
 
@@ -1280,21 +1292,28 @@ function hideTyping() {
   document.getElementById('chat-typing')?.remove();
 }
 
-// ── Submit lead to Zapier ──
+// ── Submit lead to Supabase Edge Function ──
 async function submitChatLead() {
-  botSay({ msg: `Perfect, ${chatLead.name}! ✅ We'll call ${chatLead.phone} shortly to confirm your ${chatLead.intent.toLowerCase()}.\n\nRemember: first month free if you sign before April 1st! 🎉`, chips: ['Back to menu'] });
-  if (ZAPIER_CHAT_WEBHOOK !== 'ZAPIER_CHAT_URL') {
-    try {
-      await fetch(ZAPIER_CHAT_WEBHOOK, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          source: 'Mona Shores Flats — Chat', intent: chatLead.intent,
-          name: chatLead.name, phone: chatLead.phone, timestamp: new Date().toISOString()
-        })
-      });
-    } catch(e) {}
-  }
+  const firstName = chatLead.name.split(' ')[0];
+  const hasEmail  = chatLead.email && chatLead.email.includes('@');
+  botSay({
+    msg: `You're all set, ${firstName}! ✅ ${hasEmail ? `We'll send details to ${chatLead.email} and` : 'We'll'} follow up at ${chatLead.phone} to confirm your ${chatLead.intent.toLowerCase()}.\n\nRemember: first month free if you sign before April 1st! 🎉`,
+    chips: ['Back to menu']
+  });
+  try {
+    await fetch(LEAD_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name:   chatLead.name,
+        phone:  chatLead.phone,
+        email:  chatLead.email,
+        intent: chatLead.intent,
+        entry:  chatEntry,
+        source: 'website_chat',
+      })
+    });
+  } catch(e) { /* fail silently — lead is still shown to user */ }
 }
 
 // ── Send typed message ──
