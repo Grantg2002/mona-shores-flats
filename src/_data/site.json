@@ -73,10 +73,6 @@
   ],
   "googleReviewsUrl": "",
   "tourVideo": "",
-  "_testimonials_note": "PLACEHOLDER SAMPLES — replace with real resident reviews before public launch. Pull from your Google Business Profile. Remove any you don't have permission to display.",
-  "testimonials": [
-    { "quote": "Everything is brand new and the kitchen is gorgeous. Being able to walk to Mona Lake sold us.", "name": "Resident — 2 Bedroom", "sample": true },
-    { "quote": "The leasing team made it so easy, and having a washer and dryer in the unit is a game changer.", "name": "Resident — 1 Bedroom", "sample": true },
-    { "quote": "Quiet, clean, and close to everything in Muskegon. The dog run is a bonus for our pup.", "name": "Resident — 3 Bedroom", "sample": true }
-  ]
+  "_testimonials_note": "Add REAL resident reviews here as objects like { \"quote\": \"...\", \"name\": \"First N. — 2 Bedroom\" }. The Reviews section auto-shows once this array has entries. Don't publish invented reviews.",
+  "testimonials": []
 }
