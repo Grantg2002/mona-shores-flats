@@ -55,6 +55,17 @@ still works via its scripted flows and keyword matching — only the free-text A
 
 ---
 
+## Content to fill in `src/_data/site.json` before public launch
+
+- **`testimonials`** — currently **placeholder samples** (marked `"sample": true`). Replace with real
+  resident reviews (e.g. from your Google Business Profile) or remove. Don't publish invented reviews.
+- **`googleReviewsUrl`** — paste your Google reviews link to light up the "Read/Leave a Google review"
+  buttons (also your best path into the Google Map Pack).
+- **`tourVideo`** — leave empty to show the free auto-playing photo "tour," or paste a YouTube/Vimeo
+  **embed** URL (`https://www.youtube.com/embed/XXXX`) to swap in a real walkthrough. No subscription needed.
+- **Chat AI fallback** — in `src/assets/js/chat.js`, set `AI_PROXY_URL` to your deployed Worker URL to
+  enable free-text AI answers. Until then the chat works via its scripted flows + keyword matching.
+
 ## Notes
 
 - The site is built by **Eleventy** from `src/` into `_site/` (which is git-ignored). Only `_site/` is
