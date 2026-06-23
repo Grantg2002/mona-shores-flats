@@ -4,13 +4,14 @@
 
 /* ---- Tokens ---- */
 :root {
-  /* color */
-  --ink: #0e0e10;
-  --ink-2: #3a3a40;
-  --muted: #76767e;
-  --line: #e7e7e9;
-  --paper: #ffffff;
-  --paper-2: #f6f6f4;
+  /* color — warm editorial */
+  --ink: #211f1b;
+  --ink-2: #4b463e;
+  --muted: #8b857a;
+  --line: #e9e3d8;
+  --canvas: #faf7f1;       /* warm page background */
+  --paper: #ffffff;        /* cards */
+  --paper-2: #f4efe6;      /* warm alt sections */
   --accent: #1b5d86;       /* lake blue */
   --accent-2: #103f5c;
   --accent-soft: #eef4f8;
@@ -37,7 +38,7 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   font-family: var(--font-body);
   color: var(--ink);
-  background: var(--paper);
+  background: var(--canvas);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -350,6 +351,22 @@ h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); letter-spacing: -0.005em; }
 .feature__list { list-style: none; display: grid; gap: 8px; margin-top: 6px; }
 .feature__list li { display: flex; gap: 9px; font-size: .94rem; color: var(--ink-2); }
 .feature__list li::before { content: "✓"; color: var(--accent); font-weight: 800; }
+
+/* amenity photo cards */
+.acards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: clamp(28px, 4vw, 44px); }
+@media (max-width: 760px) { .acards { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 440px) { .acards { grid-template-columns: 1fr; } }
+.acard { position: relative; aspect-ratio: 4/3; border-radius: var(--r-md); overflow: hidden; }
+.acard img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.16,1,.3,1); }
+.acard:hover img { transform: scale(1.05); }
+.acard__label { position: absolute; inset: auto 0 0 0; padding: 28px 16px 14px; color: #fff; background: linear-gradient(transparent, rgba(20,18,14,.78)); }
+.acard__label strong { display: block; font-family: var(--font-display); font-weight: 500; font-size: 1.08rem; }
+.acard__label span { font-size: .8rem; opacity: .85; }
+.acard--plain { background: var(--accent-soft); }
+.acard--plain .acard__label { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; background: none; color: var(--accent-2); }
+.acard--plain .acard__ico { position: absolute; top: 16px; left: 16px; font-size: 1.5rem; }
+.acard--plain .acard__label strong { color: var(--ink); }
+.acard--plain .acard__label span { color: var(--muted); }
 
 /* "what's included" checklist (photo-less items) */
 .checklist { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 36px; }

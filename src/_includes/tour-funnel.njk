@@ -1,0 +1,50 @@
+<div id="{{ funnelId or 'tour' }}" class="panel" data-funnel data-intent="Tour Request" data-cta="Request My Tour">
+  <h3 style="margin-bottom:6px">Schedule a Tour</h3>
+  <p class="muted" style="font-size:.9rem;margin-bottom:22px">No obligation · takes about 30 seconds</p>
+
+  <div class="steps" aria-hidden="true">
+    <div class="steps__dot is-done"></div><div class="steps__dot"></div><div class="steps__dot"></div>
+  </div>
+
+  <div class="step is-active" data-step="0">
+    <label style="font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">How many bedrooms?</label>
+    <div class="choices" data-field="bedrooms" style="margin-top:10px">
+      <button type="button" class="choice" data-value="1 Bedroom"><strong>1</strong><span>Bedroom</span></button>
+      <button type="button" class="choice" data-value="2 Bedroom"><strong>2</strong><span>Bedroom</span></button>
+      <button type="button" class="choice" data-value="3 Bedroom"><strong>3</strong><span>Bedroom</span></button>
+      <button type="button" class="choice" data-value="Not sure"><strong>?</strong><span>Not sure</span></button>
+    </div>
+  </div>
+
+  <div class="step" data-step="1">
+    <label style="font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">When are you hoping to move?</label>
+    <div class="choices" data-field="timeline" style="margin-top:10px">
+      <button type="button" class="choice" data-value="ASAP"><strong>ASAP</strong></button>
+      <button type="button" class="choice" data-value="1–2 months"><strong>1–2</strong><span>months</span></button>
+      <button type="button" class="choice" data-value="3–6 months"><strong>3–6</strong><span>months</span></button>
+      <button type="button" class="choice" data-value="Just exploring"><strong>Just</strong><span>exploring</span></button>
+    </div>
+    <div style="margin-top:18px"><button type="button" class="btn btn--ghost" data-back>← Back</button></div>
+  </div>
+
+  <div class="step" data-step="2">
+    <div class="field-row">
+      <div class="field"><label>First name</label><input name="firstName" placeholder="Jane" autocomplete="given-name" required></div>
+      <div class="field"><label>Last name</label><input name="lastName" placeholder="Smith" autocomplete="family-name"></div>
+    </div>
+    <div class="field"><label>Phone</label><input name="phone" data-phone inputmode="tel" placeholder="(616) 555-0100" autocomplete="tel" required></div>
+    <div class="field"><label>Email</label><input name="email" type="email" placeholder="jane@email.com" autocomplete="email"></div>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:6px">
+      <button type="button" class="btn btn--ghost" data-back>←</button>
+      <button type="button" class="btn btn--accent" data-submit style="flex:1">Request My Tour</button>
+    </div>
+    <p class="muted" style="font-size:.74rem;margin-top:12px">We'll never share your info. Standard message rates may apply.</p>
+  </div>
+
+  <div class="step" data-step="success" style="text-align:center;padding:10px 0">
+    <div style="font-size:2rem">✓</div>
+    <h3 style="margin:8px 0 6px">You're all set!</h3>
+    <p class="muted" data-success-msg style="font-size:.92rem">We'll follow up shortly to confirm your tour.</p>
+    <div style="margin-top:18px"><a class="btn btn--accent" href="{{ site.urls.apply }}" target="_blank" rel="noopener">Or start your application →</a></div>
+  </div>
+</div>
