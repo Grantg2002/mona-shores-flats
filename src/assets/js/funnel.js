@@ -80,7 +80,7 @@ document.querySelectorAll('[data-funnel]').forEach((root) => {
     if (msg) {
       msg.textContent = handoff
         ? `Thanks ${lead.firstName}! Your application is opening in a new tab.`
-        : `Thanks ${lead.firstName}! We'll text ${lead.phone} shortly to confirm your tour. 🎉 Remember: first month free before April 1st.`;
+        : `Thanks ${lead.firstName}! We'll text ${lead.phone} shortly to confirm your tour. 🎉 Remember: one month free right now — limited time.`;
     }
     if (handoff && !win) {
       // popup was blocked — surface the manual link prominently

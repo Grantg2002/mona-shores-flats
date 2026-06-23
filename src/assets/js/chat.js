@@ -11,7 +11,7 @@
 
   const KNOWLEDGE = `You are the friendly leasing assistant for Mona Shores Flats. Keep replies under 3 sentences, warm, and end with a call-to-action.
 FACTS: 267 Seminole Rd, Norton Shores MI 49444 (5 min from Muskegon). Phone (616) 737-8592. Built 2025, 120 units, pet friendly, Mona Shores schools, short walk to Mona Lake.
-SPECIAL: First month free on a 12-month lease signed before April 1st, 2026 — always mention it.
+SPECIAL: One month free right now — a limited-time move-in offer; always mention it.
 PRICING (starting): 1BR $1,425/834sqft; Barrier-Free 1BR $1,525/931sqft; 2BR $1,685/~1,090sqft; 3BR $2,085+/1,315-1,421sqft.
 INCLUDED: in-unit W/D, dishwasher, granite + island, stainless, private balcony, central A/C, high ceilings, big closets. Community: fitness center, pickleball, dog run, playground, clubhouse, detached garages.
 Apply: ${APPLY_URL} . If they want to tour or apply, collect first name + phone.`;
@@ -28,9 +28,9 @@ Apply: ${APPLY_URL} . If they want to tour or apply, collect first name + phone.
 
   const FLOWS = {
     start: { msg: "Hi there! 👋 Welcome to Mona Shores Flats. How can I help?", chips: ['Pricing & availability', 'Current specials 🎉', 'Schedule a tour', 'Apply now', 'Pets & parking', 'Talk to someone'] },
-    'Pricing & availability': { msg: "Starting rents:\n• 1 BR — $1,425 · 834 sq ft\n• Barrier-Free 1 BR — $1,525 · 931 sq ft\n• 2 BR / 2 BA — $1,685 · ~1,090 sq ft\n• 3 BR / 2 BA — $2,085 · up to 1,421 sq ft\n\nAll homes: in-unit W/D, dishwasher, granite, balcony, A/C. 🎉 First month free before April 1st!", chips: ['Check live availability', 'Current specials 🎉', 'Schedule a tour', 'Apply now', 'Back'] },
+    'Pricing & availability': { msg: "Starting rents:\n• 1 BR — $1,425 · 834 sq ft\n• Barrier-Free 1 BR — $1,525 · 931 sq ft\n• 2 BR / 2 BA — $1,685 · ~1,090 sq ft\n• 3 BR / 2 BA — $2,085 · up to 1,421 sq ft\n\nAll homes: in-unit W/D, dishwasher, granite, balcony, A/C. 🎉 One month free right now — limited time!", chips: ['Check live availability', 'Current specials 🎉', 'Schedule a tour', 'Apply now', 'Back'] },
     'Check live availability': { action: 'availability' },
-    'Current specials 🎉': { msg: "🎉 Right now: your FIRST MONTH IS FREE on a 12-month lease signed before April 1st, 2026. Limited homes left — want to lock in your floor plan?", chips: ['Schedule a tour', 'Apply now', 'Pricing & availability', 'Back'] },
+    'Current specials 🎉': { msg: "🎉 Right now: your FIRST MONTH IS FREE — a limited-time move-in offer. Limited homes left — want to lock in your floor plan?", chips: ['Schedule a tour', 'Apply now', 'Pricing & availability', 'Back'] },
     'Schedule a tour': { action: 'capture', intent: 'Tour Request' },
     'Apply now': { action: 'apply' },
     'Pets & parking': { msg: "We're pet friendly 🐾 (2 pets, breed restrictions, $55/dog DNA registration) and detached garages are available to rent. Call (616) 737-8592 for specifics.", chips: ['Schedule a tour', 'Call us', 'Back'] },
@@ -77,7 +77,7 @@ Apply: ${APPLY_URL} . If they want to tour or apply, collect first name + phone.
 
   function runAction(flow) {
     if (flow.action === 'capture') { lead = { name: '', phone: '', email: '', intent: flow.intent }; capture = 'name'; setTimeout(() => botSay({ msg: "Great! What's your first name?" }), 350); }
-    else if (flow.action === 'apply') { window.open(APPLY_URL, '_blank'); setTimeout(() => botSay({ msg: "Opening our secure application in a new tab. 🎉 First month free before April 1st! Anything else?", chips: ['Schedule a tour', 'Pricing & availability', 'Back'] }), 300); }
+    else if (flow.action === 'apply') { window.open(APPLY_URL, '_blank'); setTimeout(() => botSay({ msg: "Opening our secure application in a new tab. 🎉 One month free right now! Anything else?", chips: ['Schedule a tour', 'Pricing & availability', 'Back'] }), 300); }
     else if (flow.action === 'availability') { window.open(LISTING_URL, '_blank'); setTimeout(() => botSay({ msg: "Opening live availability & pricing. Want me to set up a tour while you look?", chips: ['Schedule a tour', 'Apply now', 'Back'] }), 300); }
     else if (flow.action === 'call') { window.location.href = 'tel:6167378592'; }
     else if (flow.action === 'email') { window.location.href = 'mailto:makennak@gulkergroup.com'; }
@@ -124,7 +124,7 @@ Apply: ${APPLY_URL} . If they want to tour or apply, collect first name + phone.
   async function submitLead() {
     const first = lead.name.split(' ')[0];
     const hasEmail = lead.email && lead.email.includes('@');
-    botSay({ msg: `You're all set, ${first}! ✅ ${hasEmail ? `We'll email ${lead.email} and ` : ''}follow up at ${lead.phone} to confirm your ${lead.intent.toLowerCase()}.\n\n🎉 First month free if you sign before April 1st!`, chips: ['Back to menu'] });
+    botSay({ msg: `You're all set, ${first}! ✅ ${hasEmail ? `We'll email ${lead.email} and ` : ''}follow up at ${lead.phone} to confirm your ${lead.intent.toLowerCase()}.\n\n🎉 One month free — limited-time offer!`, chips: ['Back to menu'] });
     FLOWS['Back to menu'] = FLOWS.Back;
     try {
       await fetch(LEAD_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: lead.name, phone: lead.phone, email: lead.email, intent: lead.intent, entry: 'chat:' + location.pathname, source: 'website_chat' }) });

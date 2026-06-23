@@ -85,7 +85,7 @@ PROPERTY FACTS:
 - Steps from Mona Lake Park — pet friendly community
 - 1BR from $1,425/mo (834 sqft) · Barrier-Free 1BR from $1,525/mo (931 sqft) · 2BR from $1,685/mo (~1,090 sqft) · 3BR from $2,085–$2,375/mo (up to 1,421 sqft)
 - In-unit washer/dryer, dishwasher, granite countertops, stainless appliances, private balcony or patio, fitness center, pickleball courts, dog run, playground, clubhouse
-- CURRENT SPECIAL: First month FREE when a 12-month lease is signed before April 1, 2026
+- CURRENT SPECIAL: One month free — a current limited-time move-in offer
 - Tours: Mon–Sat 9am–6pm, call (616) 737-8592 or reply to this email
 - Apply: ${APPLY_URL}
 
