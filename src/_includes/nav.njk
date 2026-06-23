@@ -1,0 +1,26 @@
+<nav class="nav" id="nav">
+  <a class="nav__brand" href="/">
+    <img src="/img/logo.png" alt="">
+    <span class="nav__name">Mona Shores Flats</span>
+  </a>
+  <div class="nav__links">
+    {% for item in site.nav %}
+      <a class="nav__link" href="{{ item.url }}">{{ item.label }}</a>
+    {% endfor %}
+  </div>
+  <div class="nav__cta">
+    <a class="nav__resident" href="{{ site.urls.resident }}" target="_blank" rel="noopener">Resident Login</a>
+    <a class="btn btn--accent" href="/contact/#tour">Schedule a Tour</a>
+    <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  {% for item in site.nav %}
+    <a href="{{ item.url }}">{{ item.label }}</a>
+  {% endfor %}
+  <a href="{{ site.urls.resident }}" target="_blank" rel="noopener">Resident Login</a>
+  <a class="btn btn--accent btn--lg" href="/contact/#tour">Schedule a Tour</a>
+</div>

@@ -1,0 +1,50 @@
+---
+layout: base.njk
+title: "Amenities | Mona Shores Flats"
+description: "In-unit washer/dryer, granite kitchens, fitness center, pickleball courts, dog run, playground, clubhouse and detached garages in Norton Shores, MI."
+---
+
+<section class="section" style="padding-top:clamp(110px,14vw,180px)">
+  <div class="wrap">
+    <div class="stack" data-reveal>
+      <div class="eyebrow">What's Included</div>
+      <h2>Everything you'd expect — on day one.</h2>
+      <p class="lead">A brand-new 2025 community with the finishes and shared spaces that make daily life easy.</p>
+    </div>
+
+    <div class="grid amenities" style="margin-top:clamp(36px,5vw,56px)">
+      {% for a in site.amenities %}
+      <div class="amenity" data-reveal><div class="amenity__ico">{{ a.icon }}</div><div class="amenity__name">{{ a.name }}</div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="split" data-reveal>
+      <div class="split__media"><img src="/img/kitchen.jpg" alt="Granite kitchen with stainless appliances"></div>
+      <div class="stack">
+        <div class="eyebrow">Inside every home</div>
+        <h2>Granite, stainless, and space to spread out.</h2>
+        <div class="points" style="margin-top:18px">
+          <div class="point"><h3>Chef-ready kitchens</h3><p>Granite countertops with island layouts, full stainless-steel appliance packages, and a dishwasher.</p></div>
+          <div class="point"><h3>In-unit laundry</h3><p>Full-size washer and dryer in every home — no shared machines, no laundromat.</p></div>
+          <div class="point"><h3>Light & air</h3><p>High ceilings, open-concept living, large windows, central A/C, and a private balcony or patio.</p></div>
+          <div class="point"><h3>Room for everything</h3><p>Generous closets, extra storage, and detached garages available to rent.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section cta">
+  <div class="wrap stack center">
+    <h2>Come tour the community.</h2>
+    <p>{{ site.special }}</p>
+    <div class="cta__actions">
+      <a class="btn btn--light btn--lg" href="/contact/#tour">Schedule a Tour</a>
+      <a class="btn btn--accent btn--lg" href="{{ site.urls.availability }}" target="_blank" rel="noopener">Check Availability →</a>
+    </div>
+  </div>
+</section>

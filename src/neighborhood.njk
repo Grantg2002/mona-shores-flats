@@ -1,0 +1,46 @@
+---
+layout: base.njk
+title: "Neighborhood & Location | Mona Shores Flats — Norton Shores, MI"
+description: "Live minutes from Mona Lake, Lake Michigan beaches, Mona Shores schools and downtown Muskegon. Easy US-31 commute to Mercy Health and Howmet Aerospace."
+---
+
+<section class="section" style="padding-top:clamp(110px,14vw,180px)">
+  <div class="wrap">
+    <div class="stack" data-reveal>
+      <div class="eyebrow">The Neighborhood</div>
+      <h2>Lakeside living, minutes from everything.</h2>
+      <p class="lead">Mona Shores Flats sits in Norton Shores — a short walk from Mona Lake Park and about five minutes from downtown Muskegon and the Lake Michigan shoreline.</p>
+    </div>
+
+    <div class="grid nearby" style="margin-top:clamp(28px,4vw,44px)">
+      {% for n in site.nearby %}
+      <div class="nearby__item" data-reveal><h3>{{ n.name }}</h3><p>{{ n.note }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" style="padding-block:0">
+  <div style="position:relative;height:clamp(360px,46vw,520px)">
+    <iframe
+      src="https://maps.google.com/maps?q=267+Seminole+Rd,+Norton+Shores,+MI+49444&t=&z=14&ie=UTF8&iwloc=&output=embed"
+      style="width:100%;height:100%;border:0;display:block" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade" title="Mona Shores Flats location map"></iframe>
+    <div class="panel" style="position:absolute;top:24px;left:24px;max-width:280px;box-shadow:var(--shadow-md)">
+      <strong style="font-family:var(--font-display);font-size:1.05rem">Mona Shores Flats</strong>
+      <p style="font-size:.86rem;color:var(--ink-2);margin:8px 0 12px">{{ site.address.street }}<br>{{ site.address.city }}, {{ site.address.region }} {{ site.address.zip }}<br>Near Mona Lake Park</p>
+      <a class="btn btn--accent btn--block" href="{{ site.urls.maps }}" target="_blank" rel="noopener">Get Directions ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="section cta">
+  <div class="wrap stack center">
+    <h2>Make Norton Shores home.</h2>
+    <p>{{ site.special }}</p>
+    <div class="cta__actions">
+      <a class="btn btn--light btn--lg" href="/contact/#tour">Schedule a Tour</a>
+      <a class="btn btn--accent btn--lg" href="/floor-plans/">View Floor Plans →</a>
+    </div>
+  </div>
+</section>

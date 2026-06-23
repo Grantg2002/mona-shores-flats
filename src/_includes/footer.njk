@@ -1,0 +1,37 @@
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">Mona Shores Flats</div>
+        <p style="color:rgba(255,255,255,.6);font-size:.92rem;margin-top:10px;max-width:34ch">
+          {{ site.address.street }}, {{ site.address.city }} {{ site.address.region }} {{ site.address.zip }}<br>
+          {{ site.phone }}
+        </p>
+        <div style="margin-top:18px">
+          <a class="btn btn--light" href="/contact/#tour">Schedule a Tour</a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        {% for item in site.nav %}<a href="{{ item.url }}">{{ item.label }}</a>{% endfor %}
+        <a href="/apply/">Apply</a>
+      </div>
+      <div>
+        <h4>Residents & Leasing</h4>
+        <a href="{{ site.urls.apply }}" target="_blank" rel="noopener">Apply Online ↗</a>
+        <a href="{{ site.urls.resident }}" target="_blank" rel="noopener">Resident Login ↗</a>
+        <a href="{{ site.urls.availability }}" target="_blank" rel="noopener">Live Availability ↗</a>
+        <a href="tel:{{ site.phoneRaw }}">Call {{ site.phone }}</a>
+        <a href="sms:{{ site.phoneRaw }}">Text us</a>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <svg width="22" height="22" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50 12 L92 46 H78 V88 H22 V46 H8 Z" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="6" stroke-linejoin="round"/>
+        <rect x="36" y="54" width="28" height="6" fill="rgba(255,255,255,.6)"/>
+        <rect x="36" y="66" width="28" height="6" fill="rgba(255,255,255,.6)"/>
+      </svg>
+      <span>Equal Housing Opportunity. We do business in accordance with the Fair Housing Act and do not discriminate on the basis of race, color, religion, sex, disability, familial status, or national origin. © {% year %} {{ site.name }} · {{ site.manager }}.</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,69 @@
+---
+layout: base.njk
+title: "Apply | Mona Shores Flats"
+description: "Start your application for Mona Shores Flats in Norton Shores, MI. Tell us what you're looking for and we'll take you straight to the secure online application."
+---
+
+<section class="section" style="padding-top:clamp(110px,14vw,180px)">
+  <div class="wrap">
+    <div style="max-width:560px;margin-inline:auto">
+      <div class="stack center" data-reveal style="margin-bottom:clamp(24px,4vw,40px)">
+        <div class="eyebrow">Apply</div>
+        <h2>Let's get you home.</h2>
+        <p class="lead center">Tell us a couple of quick things and we'll take you straight to the secure online application. 🎉 {{ site.special }}</p>
+      </div>
+
+      <div class="panel" data-funnel data-intent="Application Inquiry" data-cta="Continue to Application" data-handoff="{{ site.urls.apply }}">
+        <div class="steps" aria-hidden="true">
+          <div class="steps__dot is-done"></div><div class="steps__dot"></div><div class="steps__dot"></div>
+        </div>
+
+        <div class="step is-active" data-step="0">
+          <label style="font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Which home are you applying for?</label>
+          <div class="choices" data-field="bedrooms" style="margin-top:10px">
+            <button type="button" class="choice" data-value="1 Bedroom"><strong>1</strong><span>Bedroom</span></button>
+            <button type="button" class="choice" data-value="2 Bedroom"><strong>2</strong><span>Bedroom</span></button>
+            <button type="button" class="choice" data-value="3 Bedroom"><strong>3</strong><span>Bedroom</span></button>
+            <button type="button" class="choice" data-value="Not sure"><strong>?</strong><span>Not sure</span></button>
+          </div>
+        </div>
+
+        <div class="step" data-step="1">
+          <label style="font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Target move-in</label>
+          <div class="choices" data-field="timeline" style="margin-top:10px">
+            <button type="button" class="choice" data-value="ASAP"><strong>ASAP</strong></button>
+            <button type="button" class="choice" data-value="1–2 months"><strong>1–2</strong><span>months</span></button>
+            <button type="button" class="choice" data-value="3–6 months"><strong>3–6</strong><span>months</span></button>
+            <button type="button" class="choice" data-value="Flexible"><strong>Flexible</strong></button>
+          </div>
+          <div style="margin-top:18px"><button type="button" class="btn btn--ghost" data-back>← Back</button></div>
+        </div>
+
+        <div class="step" data-step="2">
+          <div class="field-row">
+            <div class="field"><label>First name</label><input name="firstName" placeholder="Jane" autocomplete="given-name" required></div>
+            <div class="field"><label>Last name</label><input name="lastName" placeholder="Smith" autocomplete="family-name"></div>
+          </div>
+          <div class="field"><label>Phone</label><input name="phone" data-phone inputmode="tel" placeholder="(616) 555-0100" autocomplete="tel" required></div>
+          <div class="field"><label>Email</label><input name="email" type="email" placeholder="jane@email.com" autocomplete="email"></div>
+          <div style="display:flex;gap:10px;align-items:center;margin-top:6px">
+            <button type="button" class="btn btn--ghost" data-back>←</button>
+            <button type="button" class="btn btn--accent" data-submit style="flex:1">Continue to Application</button>
+          </div>
+          <p class="muted" style="font-size:.74rem;margin-top:12px">You'll finish on our secure RentCafe application. We just pass along what you told us.</p>
+        </div>
+
+        <div class="step" data-step="success" style="text-align:center;padding:10px 0">
+          <div style="font-size:2rem">✓</div>
+          <h3 style="margin:8px 0 6px">Opening your application…</h3>
+          <p class="muted" data-success-msg style="font-size:.92rem">If it didn't open, use the button below.</p>
+          <div style="margin-top:18px"><a class="btn btn--accent" href="{{ site.urls.apply }}" target="_blank" rel="noopener" data-handoff-link>Continue to secure application →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% block scripts %}
+<script src="/assets/js/funnel.js" defer></script>
+{% endblock %}

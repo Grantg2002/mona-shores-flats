@@ -1,0 +1,46 @@
+---
+layout: base.njk
+title: "Floor Plans & Pricing | Mona Shores Flats"
+description: "1, 2 and 3 bedroom apartments plus a barrier-free accessible plan in Norton Shores, MI. From $1,425/mo. In-unit laundry, granite, private balconies."
+---
+
+<section class="section" style="padding-top:clamp(110px,14vw,180px)">
+  <div class="wrap">
+    <div class="stack" data-reveal>
+      <div class="eyebrow">Floor Plans</div>
+      <h2>Room to live, priced to fit.</h2>
+      <p class="lead">Every home includes in-unit washer/dryer, dishwasher, granite countertops, stainless-steel appliances, high ceilings, an open-concept layout, and a private balcony or patio. Prices are starting rents — see live availability for exact unit pricing.</p>
+      <div><a class="btn btn--accent" href="{{ site.urls.availability }}" target="_blank" rel="noopener">See live availability →</a></div>
+    </div>
+
+    <div class="grid plans" style="margin-top:clamp(36px,5vw,56px)">
+      {% for p in site.floorplans %}
+      <article class="plan" data-reveal>
+        <div class="plan__media"><img src="{{ p.img }}" alt="{{ p.name }} apartment at Mona Shores Flats" loading="lazy"></div>
+        <div class="plan__body">
+          <div class="plan__label">{{ p.name }}{% if p.accessible %}<span class="badge">ADA</span>{% endif %}</div>
+          <div class="plan__price">${{ p.price }}<span>/mo</span></div>
+          <div class="plan__meta">{{ p.beds }} bed · {{ p.baths }} bath · {{ p.sqft }} sq ft</div>
+          <ul class="plan__features">
+            {% for f in p.features %}<li>{{ f }}</li>{% endfor %}
+          </ul>
+          <div class="plan__foot">
+            <a class="btn btn--accent btn--block" href="{{ site.urls.availability }}" target="_blank" rel="noopener">Check Availability</a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section cta">
+  <div class="wrap stack center">
+    <h2>See it in person.</h2>
+    <p>Tours 7 days a week. {{ site.special }}</p>
+    <div class="cta__actions">
+      <a class="btn btn--light btn--lg" href="/contact/#tour">Schedule a Tour</a>
+      <a class="btn btn--accent btn--lg" href="{{ site.urls.apply }}" target="_blank" rel="noopener">Apply Now →</a>
+    </div>
+  </div>
+</section>

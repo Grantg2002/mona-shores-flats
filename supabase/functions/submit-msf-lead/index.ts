@@ -83,10 +83,10 @@ How they found us: ${entry || 'website chat'}
 PROPERTY FACTS:
 - Brand new apartments at 267 Seminole Rd, Norton Shores MI (5 min from Muskegon)
 - Steps from Mona Lake Park — pet friendly community
-- 1BR from $1,425/mo (834–934 sqft) · 2BR from $1,750/mo · 3BR from $2,100–$2,375/mo
-- In-unit washer/dryer, dishwasher, private balcony or patio, fitness center, pickleball courts, dog run
-- CURRENT SPECIAL: First month FREE when lease signed before April 1, 2026
-- Tours: Mon–Sat 9am–6pm, call 616.558.0317 or reply to this email
+- 1BR from $1,425/mo (834 sqft) · Barrier-Free 1BR from $1,525/mo (931 sqft) · 2BR from $1,685/mo (~1,090 sqft) · 3BR from $2,085–$2,375/mo (up to 1,421 sqft)
+- In-unit washer/dryer, dishwasher, granite countertops, stainless appliances, private balcony or patio, fitness center, pickleball courts, dog run, playground, clubhouse
+- CURRENT SPECIAL: First month FREE when a 12-month lease is signed before April 1, 2026
+- Tours: Mon–Sat 9am–6pm, call (616) 737-8592 or reply to this email
 - Apply: ${APPLY_URL}
 
 Write 3 short paragraphs. Personalize to their inquiry. Always mention first month free. End with a clear CTA to schedule a tour. Sign as Makenna.

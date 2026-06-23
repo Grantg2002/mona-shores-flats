@@ -1,0 +1,82 @@
+{
+  "name": "Mona Shores Flats",
+  "tagline": "Brand-new apartments on Mona Lake.",
+  "url": "https://www.monashoresflats.com",
+  "phone": "(616) 737-8592",
+  "phoneRaw": "6167378592",
+  "email": "makennak@gulkergroup.com",
+  "manager": "Fusion Properties LLC",
+  "address": {
+    "street": "267 Seminole Rd",
+    "city": "Norton Shores",
+    "region": "MI",
+    "zip": "49444",
+    "lat": 43.1663,
+    "lng": -86.2470
+  },
+  "hours": "Mon–Sat 9am–6pm · Sun by appointment",
+  "special": "First month free on a 12-month lease signed before April 1st.",
+  "urls": {
+    "apply": "https://monashoresflats.securecafe.com/onlineleasing/mona-shores-flats/guestlogin.aspx",
+    "resident": "https://monashoresflats.securecafe.com/residentservices/mona-shores-flats/userlogin.aspx",
+    "availability": "https://www.rentcafe.com/apartments/mi/norton-shores/mona-shores-flats/default.aspx",
+    "maps": "https://maps.google.com/?q=267+Seminole+Rd+Norton+Shores+MI+49444"
+  },
+  "nav": [
+    { "label": "Floor Plans", "url": "/floor-plans/" },
+    { "label": "Amenities", "url": "/amenities/" },
+    { "label": "Gallery", "url": "/gallery/" },
+    { "label": "Neighborhood", "url": "/neighborhood/" },
+    { "label": "Contact", "url": "/contact/" }
+  ],
+  "floorplans": [
+    { "name": "1 Bedroom", "beds": 1, "baths": 1, "sqft": "834", "price": 1425, "img": "/img/kitchen2.jpg", "features": ["In-unit washer & dryer", "Granite countertops & island", "Private balcony or patio", "Large closet", "Central A/C & heat"] },
+    { "name": "Barrier-Free 1 Bedroom", "beds": 1, "baths": 1, "sqft": "931", "price": 1525, "accessible": true, "img": "/img/bedroom2.jpg", "features": ["Step-free, accessible design", "Wider doorways & turning space", "In-unit washer & dryer", "Granite countertops", "Central A/C & heat"] },
+    { "name": "2 Bedroom", "beds": 2, "baths": 2, "sqft": "1,087–1,097", "price": 1685, "img": "/img/living2.jpg", "features": ["Two full bathrooms", "In-unit washer & dryer", "Granite countertops & island", "Open-concept layout", "Private balcony or patio"] },
+    { "name": "3 Bedroom", "beds": 3, "baths": 2, "sqft": "1,315–1,421", "price": 2085, "img": "/img/living3.jpg", "features": ["Family-sized layout", "Two full bathrooms", "In-unit washer & dryer", "Extra storage", "Private balcony or patio"] }
+  ],
+  "amenities": [
+    { "icon": "🫧", "name": "In-Unit Washer & Dryer" },
+    { "icon": "🍽️", "name": "Dishwasher" },
+    { "icon": "✦", "name": "Granite Countertops" },
+    { "icon": "🌿", "name": "Private Balcony or Patio" },
+    { "icon": "❄️", "name": "Central A/C & Heat" },
+    { "icon": "🏋️", "name": "Fitness Center" },
+    { "icon": "🎾", "name": "Pickleball Courts" },
+    { "icon": "🐕", "name": "On-Site Dog Run" },
+    { "icon": "🛝", "name": "Playground" },
+    { "icon": "🏛️", "name": "Resident Clubhouse" },
+    { "icon": "🚗", "name": "Detached Garages" },
+    { "icon": "✨", "name": "2025 New Construction" }
+  ],
+  "gallery": [
+    { "src": "/img/building.jpg", "cap": "2025 new construction · Norton Shores" },
+    { "src": "/img/kitchen.jpg", "cap": "Granite kitchens · stainless appliances" },
+    { "src": "/img/kitchen2.jpg", "cap": "Open-concept island layouts" },
+    { "src": "/img/living.jpg", "cap": "Light-filled living · balcony access" },
+    { "src": "/img/living2.jpg", "cap": "Spacious open living areas" },
+    { "src": "/img/bedroom.jpg", "cap": "Generous primary bedrooms" },
+    { "src": "/img/bedroom2.jpg", "cap": "Comfortable, carpeted bedrooms" },
+    { "src": "/img/bathroom.jpg", "cap": "Granite vanities · modern fixtures" },
+    { "src": "/img/bathroom2.jpg", "cap": "Clean, contemporary baths" },
+    { "src": "/img/closet.jpg", "cap": "Generous closets" },
+    { "src": "/img/laundry.jpg", "cap": "Full-size in-unit laundry" },
+    { "src": "/img/courtyard.jpg", "cap": "French doors to private balconies" }
+  ],
+  "nearby": [
+    { "name": "Mona Lake & Mona Lake Park", "note": "695 acres connected to Lake Michigan — a short walk away." },
+    { "name": "Mona Shores School District", "note": "Among the best-rated in West Michigan." },
+    { "name": "Downtown Muskegon", "note": "About 5 minutes away — dining, lakeshore, events." },
+    { "name": "Mercy Health & Howmet Aerospace", "note": "Major employers within an easy commute." },
+    { "name": "Lake Michigan beaches", "note": "Pere Marquette and the lakeshore minutes west." },
+    { "name": "US-31 corridor", "note": "Quick access north and south along the lakeshore." }
+  ],
+  "googleReviewsUrl": "",
+  "tourVideo": "",
+  "_testimonials_note": "PLACEHOLDER SAMPLES — replace with real resident reviews before public launch. Pull from your Google Business Profile. Remove any you don't have permission to display.",
+  "testimonials": [
+    { "quote": "Everything is brand new and the kitchen is gorgeous. Being able to walk to Mona Lake sold us.", "name": "Resident — 2 Bedroom", "sample": true },
+    { "quote": "The leasing team made it so easy, and having a washer and dryer in the unit is a game changer.", "name": "Resident — 1 Bedroom", "sample": true },
+    { "quote": "Quiet, clean, and close to everything in Muskegon. The dog run is a bonus for our pup.", "name": "Resident — 3 Bedroom", "sample": true }
+  ]
+}
