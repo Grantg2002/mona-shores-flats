@@ -344,6 +344,13 @@ h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); letter-spacing: -0.005em; }
 .amen-group__head h3 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
 .amen-group__head span { font-size: .85rem; color: var(--muted); }
 
+/* alternating photo feature rows */
+.features { display: grid; gap: clamp(48px, 7vw, 96px); margin-top: clamp(36px, 5vw, 56px); }
+.feature-h { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+.feature__list { list-style: none; display: grid; gap: 8px; margin-top: 6px; }
+.feature__list li { display: flex; gap: 9px; font-size: .94rem; color: var(--ink-2); }
+.feature__list li::before { content: "✓"; color: var(--accent); font-weight: 800; }
+
 /* "what's included" checklist (photo-less items) */
 .checklist { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 36px; }
 @media (max-width: 720px) { .checklist { grid-template-columns: repeat(2, 1fr); } }
