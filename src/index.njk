@@ -56,17 +56,17 @@ description: "Brand-new 1–3 bedroom apartments in Norton Shores, MI. Mona Shor
     </div>
     <div class="grid plans">
       {% for p in site.floorplans %}
-      <article class="plan" data-reveal>
+      <a class="plan" href="/floor-plans/{{ p.slug }}/" data-reveal>
         <div class="plan__media"><img src="{{ p.img }}" alt="{{ p.name }} apartment" loading="lazy"></div>
         <div class="plan__body">
           <div class="plan__label">{{ p.name }}{% if p.accessible %}<span class="badge">ADA</span>{% endif %}</div>
           <div class="plan__price">${{ p.price }}<span>/mo · {{ p.sqft }} sq ft</span></div>
           <div class="plan__meta">{{ p.beds }} bed · {{ p.baths }} bath</div>
           <div class="plan__foot">
-            <a class="btn btn--accent btn--block" href="{{ site.urls.availability }}" target="_blank" rel="noopener">Check Availability</a>
+            <span class="btn btn--accent btn--block">View details →</span>
           </div>
         </div>
-      </article>
+      </a>
       {% endfor %}
     </div>
   </div>
@@ -99,13 +99,19 @@ description: "Brand-new 1–3 bedroom apartments in Norton Shores, MI. Mona Shor
 <section class="section">
   <div class="wrap">
     <div class="section__head" data-reveal>
-      <div class="stack"><div class="eyebrow">What's Included</div><h2>No trade-offs.</h2></div>
+      <div class="stack">
+        <div class="eyebrow">What's Included</div>
+        <h2>Everything, actually included.</h2>
+        <p class="lead">Granite kitchens, in-unit laundry, a fitness center, pickleball, a dog run and more — in a brand-new 2025 community.</p>
+      </div>
       <a class="btn btn--ghost" href="/amenities/">All amenities →</a>
     </div>
-    <div class="grid amenities">
-      {% for a in site.amenities %}
-      <div class="amenity" data-reveal><div class="amenity__ico">{{ a.icon }}</div><div class="amenity__name">{{ a.name }}</div></div>
-      {% endfor %}
+    <div class="showcase" data-reveal>
+      <figure class="showcase__tile showcase__tile--lg"><img src="/img/kitchen.jpg" alt="Granite island kitchen" loading="lazy"><figcaption><strong>Granite Kitchens</strong><span>Island layouts · stainless steel</span></figcaption></figure>
+      <figure class="showcase__tile showcase__tile--wide"><img src="/img/gym.jpg" alt="On-site fitness center" loading="lazy"><figcaption><strong>Fitness Center</strong><span>Cardio · strength · Peloton</span></figcaption></figure>
+      <figure class="showcase__tile"><img src="/img/laundry.jpg" alt="In-unit washer and dryer" loading="lazy"><figcaption><strong>In-Unit Laundry</strong></figcaption></figure>
+      <figure class="showcase__tile"><img src="/img/courtyard.jpg" alt="Private balcony with French doors" loading="lazy"><figcaption><strong>Private Balconies</strong></figcaption></figure>
+      <figure class="showcase__tile showcase__tile--wide"><img src="/img/building.jpg" alt="Mona Shores Flats exterior" loading="lazy"><figcaption><strong>2025 Construction</strong><span>Pickleball · dog run · playground · clubhouse</span></figcaption></figure>
     </div>
   </div>
 </section>

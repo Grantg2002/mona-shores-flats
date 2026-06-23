@@ -1,46 +1,54 @@
 ---
 layout: base.njk
 title: "Amenities | Mona Shores Flats"
-description: "In-unit washer/dryer, granite kitchens, fitness center, pickleball courts, dog run, playground, clubhouse and detached garages in Norton Shores, MI."
+description: "See what's included: granite kitchens, in-unit laundry, fitness center, pickleball courts, dog run, playground, clubhouse and detached garages in Norton Shores, MI."
 ---
 
 <section class="section" style="padding-top:clamp(110px,14vw,180px)">
   <div class="wrap">
     <div class="stack" data-reveal>
       <div class="eyebrow">What's Included</div>
-      <h2>Everything you'd expect — on day one.</h2>
-      <p class="lead">A brand-new 2025 community with the finishes and shared spaces that make daily life easy.</p>
+      <h2>See exactly what you're getting.</h2>
+      <p class="lead">A brand-new 2025 community — real photos of the finishes and spaces, not a checklist of buzzwords.</p>
     </div>
 
-    <div class="grid amenities" style="margin-top:clamp(36px,5vw,56px)">
-      {% for a in site.amenities %}
-      <div class="amenity" data-reveal><div class="amenity__ico">{{ a.icon }}</div><div class="amenity__name">{{ a.name }}</div></div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<section class="section section--alt">
-  <div class="wrap">
-    <div class="split" data-reveal>
-      <div class="split__media"><img src="/img/kitchen.jpg" alt="Granite kitchen with stainless appliances"></div>
-      <div class="stack">
-        <div class="eyebrow">Inside every home</div>
-        <h2>Granite, stainless, and space to spread out.</h2>
-        <div class="points" style="margin-top:18px">
-          <div class="point"><h3>Chef-ready kitchens</h3><p>Granite countertops with island layouts, full stainless-steel appliance packages, and a dishwasher.</p></div>
-          <div class="point"><h3>In-unit laundry</h3><p>Full-size washer and dryer in every home — no shared machines, no laundromat.</p></div>
-          <div class="point"><h3>Light & air</h3><p>High ceilings, open-concept living, large windows, central A/C, and a private balcony or patio.</p></div>
-          <div class="point"><h3>Room for everything</h3><p>Generous closets, extra storage, and detached garages available to rent.</p></div>
-        </div>
+    <!-- In-home -->
+    <div class="amen-group">
+      <div class="amen-group__head" data-reveal><h3>In your home</h3><span>Every floor plan, standard</span></div>
+      <div class="showcase" data-reveal>
+        <figure class="showcase__tile showcase__tile--lg"><img src="/img/kitchen.jpg" alt="Granite island kitchen with stainless appliances" loading="lazy"><figcaption><strong>Granite Kitchens</strong><span>Island layouts · full stainless package</span></figcaption></figure>
+        <figure class="showcase__tile showcase__tile--wide"><img src="/img/living.jpg" alt="Light-filled open living room" loading="lazy"><figcaption><strong>Open Living</strong><span>High ceilings · balcony access</span></figcaption></figure>
+        <figure class="showcase__tile"><img src="/img/laundry.jpg" alt="Full-size in-unit washer and dryer" loading="lazy"><figcaption><strong>In-Unit Laundry</strong></figcaption></figure>
+        <figure class="showcase__tile"><img src="/img/bathroom.jpg" alt="Bathroom with granite vanity" loading="lazy"><figcaption><strong>Granite Baths</strong></figcaption></figure>
+        <figure class="showcase__tile"><img src="/img/bedroom.jpg" alt="Spacious carpeted bedroom" loading="lazy"><figcaption><strong>Quiet Bedrooms</strong></figcaption></figure>
+        <figure class="showcase__tile"><img src="/img/closet.jpg" alt="Generous bedroom closet" loading="lazy"><figcaption><strong>Generous Closets</strong></figcaption></figure>
       </div>
+    </div>
+
+    <!-- Community -->
+    <div class="amen-group">
+      <div class="amen-group__head" data-reveal><h3>Around the community</h3><span>Shared spaces for residents</span></div>
+      <div class="showcase" data-reveal>
+        <figure class="showcase__tile showcase__tile--lg"><img src="/img/gym.jpg" alt="On-site fitness center" loading="lazy"><figcaption><strong>Fitness Center</strong><span>Cardio · strength · Peloton</span></figcaption></figure>
+        <figure class="showcase__tile showcase__tile--wide"><img src="/img/gym2.jpg" alt="Fitness center second view" loading="lazy"><figcaption><strong>Open Daily</strong><span>Free for residents</span></figcaption></figure>
+        <figure class="showcase__tile showcase__tile--wide"><img src="/img/building.jpg" alt="Mona Shores Flats grounds and exterior" loading="lazy"><figcaption><strong>Landscaped Grounds</strong><span>2025 construction</span></figcaption></figure>
+      </div>
+      <p class="muted" style="font-size:.86rem;margin-top:14px">Also on site: pickleball courts, an on-site dog run, a playground, a resident clubhouse, and detached garages available to rent. <a href="/contact/#tour" style="color:var(--accent);font-weight:600">Tour to see them →</a></p>
+    </div>
+
+    <!-- Everything included -->
+    <div class="amen-group">
+      <div class="amen-group__head" data-reveal><h3>Everything included</h3></div>
+      <ul class="checklist" data-reveal>
+        {% for a in site.amenities %}<li>{{ a.name }}</li>{% endfor %}
+      </ul>
     </div>
   </div>
 </section>
 
 <section class="section cta">
   <div class="wrap stack center">
-    <h2>Come tour the community.</h2>
+    <h2>Come see it in person.</h2>
     <p>{{ site.special }}</p>
     <div class="cta__actions">
       <a class="btn btn--light btn--lg" href="/contact/#tour">Schedule a Tour</a>

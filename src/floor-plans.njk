@@ -16,7 +16,7 @@ description: "1, 2 and 3 bedroom apartments plus a barrier-free accessible plan 
     <div class="grid plans" style="margin-top:clamp(36px,5vw,56px)">
       {% for p in site.floorplans %}
       <article class="plan" data-reveal>
-        <div class="plan__media"><img src="{{ p.img }}" alt="{{ p.name }} apartment at Mona Shores Flats" loading="lazy"></div>
+        <a href="/floor-plans/{{ p.slug }}/" class="plan__media" style="display:block"><img src="{{ p.img }}" alt="{{ p.name }} apartment at Mona Shores Flats" loading="lazy"></a>
         <div class="plan__body">
           <div class="plan__label">{{ p.name }}{% if p.accessible %}<span class="badge">ADA</span>{% endif %}</div>
           <div class="plan__price">${{ p.price }}<span>/mo</span></div>
@@ -25,7 +25,7 @@ description: "1, 2 and 3 bedroom apartments plus a barrier-free accessible plan 
             {% for f in p.features %}<li>{{ f }}</li>{% endfor %}
           </ul>
           <div class="plan__foot">
-            <a class="btn btn--accent btn--block" href="{{ site.urls.availability }}" target="_blank" rel="noopener">Check Availability</a>
+            <a class="btn btn--accent btn--block" href="/floor-plans/{{ p.slug }}/">View details →</a>
           </div>
         </div>
       </article>

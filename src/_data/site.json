@@ -30,10 +30,10 @@
     { "label": "Contact", "url": "/contact/" }
   ],
   "floorplans": [
-    { "name": "1 Bedroom", "beds": 1, "baths": 1, "sqft": "834", "price": 1425, "img": "/img/kitchen2.jpg", "features": ["In-unit washer & dryer", "Granite countertops & island", "Private balcony or patio", "Large closet", "Central A/C & heat"] },
-    { "name": "Barrier-Free 1 Bedroom", "beds": 1, "baths": 1, "sqft": "931", "price": 1525, "accessible": true, "img": "/img/bedroom2.jpg", "features": ["Step-free, accessible design", "Wider doorways & turning space", "In-unit washer & dryer", "Granite countertops", "Central A/C & heat"] },
-    { "name": "2 Bedroom", "beds": 2, "baths": 2, "sqft": "1,087–1,097", "price": 1685, "img": "/img/living2.jpg", "features": ["Two full bathrooms", "In-unit washer & dryer", "Granite countertops & island", "Open-concept layout", "Private balcony or patio"] },
-    { "name": "3 Bedroom", "beds": 3, "baths": 2, "sqft": "1,315–1,421", "price": 2085, "img": "/img/living3.jpg", "features": ["Family-sized layout", "Two full bathrooms", "In-unit washer & dryer", "Extra storage", "Private balcony or patio"] }
+    { "name": "1 Bedroom", "slug": "1-bedroom", "beds": 1, "baths": 1, "sqft": "834", "price": 1425, "img": "/img/kitchen2.jpg", "photos": ["/img/kitchen.jpg", "/img/living.jpg", "/img/bedroom.jpg"], "blurb": "A bright, efficient one-bedroom with a granite island kitchen, full-size in-unit laundry, and a private balcony — ideal for singles, couples, and remote work.", "features": ["In-unit washer & dryer", "Granite countertops & island", "Private balcony or patio", "Large closet", "Central A/C & heat"] },
+    { "name": "Barrier-Free 1 Bedroom", "slug": "barrier-free-1-bedroom", "beds": 1, "baths": 1, "sqft": "931", "price": 1525, "accessible": true, "img": "/img/bedroom2.jpg", "photos": ["/img/living.jpg", "/img/kitchen.jpg", "/img/bathroom.jpg"], "blurb": "A fully accessible one-bedroom designed step-free, with wider doorways and turning space throughout — the same finishes, built for easy living.", "features": ["Step-free, accessible design", "Wider doorways & turning space", "In-unit washer & dryer", "Granite countertops", "Central A/C & heat"] },
+    { "name": "2 Bedroom", "slug": "2-bedroom", "beds": 2, "baths": 2, "sqft": "1,087–1,097", "price": 1685, "img": "/img/living2.jpg", "photos": ["/img/living.jpg", "/img/kitchen2.jpg", "/img/bedroom.jpg"], "blurb": "An open-concept two-bedroom, two-bath with room to spread out — two full baths, a generous living area, and a private balcony or patio.", "features": ["Two full bathrooms", "In-unit washer & dryer", "Granite countertops & island", "Open-concept layout", "Private balcony or patio"] },
+    { "name": "3 Bedroom", "slug": "3-bedroom", "beds": 3, "baths": 2, "sqft": "1,315–1,421", "price": 2085, "img": "/img/living3.jpg", "photos": ["/img/living2.jpg", "/img/kitchen.jpg", "/img/bedroom2.jpg"], "blurb": "Our largest layout — a family-sized three-bedroom, two-bath with extra storage, two full baths, and an open living and dining space.", "features": ["Family-sized layout", "Two full bathrooms", "In-unit washer & dryer", "Extra storage", "Private balcony or patio"] }
   ],
   "amenities": [
     { "icon": "🫧", "name": "In-Unit Washer & Dryer" },
@@ -50,18 +50,18 @@
     { "icon": "✨", "name": "2025 New Construction" }
   ],
   "gallery": [
-    { "src": "/img/building.jpg", "cap": "2025 new construction · Norton Shores" },
-    { "src": "/img/kitchen.jpg", "cap": "Granite kitchens · stainless appliances" },
-    { "src": "/img/kitchen2.jpg", "cap": "Open-concept island layouts" },
-    { "src": "/img/living.jpg", "cap": "Light-filled living · balcony access" },
-    { "src": "/img/living2.jpg", "cap": "Spacious open living areas" },
-    { "src": "/img/bedroom.jpg", "cap": "Generous primary bedrooms" },
-    { "src": "/img/bedroom2.jpg", "cap": "Comfortable, carpeted bedrooms" },
-    { "src": "/img/bathroom.jpg", "cap": "Granite vanities · modern fixtures" },
-    { "src": "/img/bathroom2.jpg", "cap": "Clean, contemporary baths" },
-    { "src": "/img/closet.jpg", "cap": "Generous closets" },
-    { "src": "/img/laundry.jpg", "cap": "Full-size in-unit laundry" },
-    { "src": "/img/courtyard.jpg", "cap": "French doors to private balconies" }
+    { "src": "/img/building.jpg", "cap": "2025 new construction · Norton Shores", "cat": "Exterior" },
+    { "src": "/img/kitchen.jpg", "cap": "Granite kitchens · stainless appliances", "cat": "Kitchens" },
+    { "src": "/img/kitchen2.jpg", "cap": "Open-concept island layouts", "cat": "Kitchens" },
+    { "src": "/img/living.jpg", "cap": "Light-filled living · balcony access", "cat": "Interiors" },
+    { "src": "/img/living2.jpg", "cap": "Spacious open living areas", "cat": "Interiors" },
+    { "src": "/img/bedroom.jpg", "cap": "Generous primary bedrooms", "cat": "Bedrooms & Baths" },
+    { "src": "/img/bedroom2.jpg", "cap": "Comfortable, carpeted bedrooms", "cat": "Bedrooms & Baths" },
+    { "src": "/img/bathroom.jpg", "cap": "Granite vanities · modern fixtures", "cat": "Bedrooms & Baths" },
+    { "src": "/img/bathroom2.jpg", "cap": "Clean, contemporary baths", "cat": "Bedrooms & Baths" },
+    { "src": "/img/closet.jpg", "cap": "Generous closets", "cat": "Bedrooms & Baths" },
+    { "src": "/img/laundry.jpg", "cap": "Full-size in-unit laundry", "cat": "Interiors" },
+    { "src": "/img/courtyard.jpg", "cap": "French doors to private balconies", "cat": "Interiors" }
   ],
   "nearby": [
     { "name": "Mona Lake & Mona Lake Park", "note": "695 acres connected to Lake Michigan — a short walk away." },
