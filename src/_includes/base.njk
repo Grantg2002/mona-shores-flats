@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title or site.name }}</title>
+<meta name="description" content="{{ description or 'Brand-new 1–3 bedroom apartments in Norton Shores, MI — minutes from Mona Lake and Muskegon. In-unit laundry, granite, pet friendly.' }}">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ title or site.name }}">
+<meta property="og:description" content="{{ description or 'Brand-new apartments near Muskegon. Mona Lake lifestyle, Mona Shores schools. From $1,425/mo.' }}">
+<meta property="og:image" content="{{ site.url }}/img/building.jpg">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="geo.region" content="US-MI">
+<meta name="geo.placename" content="Norton Shores">
+<meta name="geo.position" content="{{ site.address.lat }};{{ site.address.lng }}">
+<meta name="ICBM" content="{{ site.address.lat }}, {{ site.address.lng }}">
+
+<link rel="icon" href="/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+{% block head %}{% endblock %}
+</head>
+<body>
+{% include "nav.njk" %}
+<main id="main">
+{{ content | safe }}
+</main>
+{% include "footer.njk" %}
+
+<!-- Sticky mobile CTA -->
+<div class="mcta">
+  <a class="btn btn--accent" href="/contact/#tour">Schedule Tour</a>
+  <a class="btn btn--ghost" href="tel:{{ site.phoneRaw }}">Call</a>
+  <a class="btn btn--primary" href="{{ site.urls.apply }}" target="_blank" rel="noopener">Apply</a>
+</div>
+
+<script src="/assets/js/main.js" defer></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

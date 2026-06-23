@@ -15,9 +15,9 @@ every time you push to the branch.
 2. Authorize GitHub and pick **`Grantg2002/mona-shores-flats`**.
 3. Configure the build:
    - **Production branch:** `claude/website-yardi-integration-erxge0` (or `main` after you merge).
-   - **Framework preset:** `None`
-   - **Build command:** *(leave empty)*
-   - **Build output directory:** `public`  (the site lives in `public/`)
+   - **Framework preset:** `None` (or `Eleventy`)
+   - **Build command:** `npm run build`
+   - **Build output directory:** `_site`  (Eleventy renders the site into `_site/`)
 4. **Save and Deploy.**
 
 You'll get a live URL like **`https://mona-shores-flats.pages.dev`** in under a minute. Every future
@@ -29,13 +29,15 @@ the project's **Custom domains** tab.
 ## Route B — One command from your machine (Wrangler CLI)
 
 ```bash
-npm install                       # installs wrangler (devDependency)
+npm install                       # installs Eleventy + wrangler
 npx wrangler login                # opens browser, logs into YOUR Cloudflare account
-npm run deploy:site               # uploads the current folder to Cloudflare Pages
+npm run deploy:site               # builds with Eleventy, then uploads _site to Cloudflare Pages
 ```
 
-`npm run deploy:site` runs `wrangler pages deploy public --project-name=mona-shores-flats`.
+`npm run deploy:site` runs `npm run build && wrangler pages deploy _site --project-name=mona-shores-flats`.
 First run creates the project and prints the `*.pages.dev` URL.
+
+To preview locally before deploying: `npm run dev` (serves at http://localhost:8080 with live reload).
 
 ---
 
@@ -55,6 +57,9 @@ still works via its scripted flows and keyword matching — only the free-text A
 
 ## Notes
 
-- The site lives in `public/` (just `index.html` + `img/`), so only those assets are deployed — `docs/`,
-  `supabase/`, and `cloudflare-worker.js` stay out of the public bundle.
+- The site is built by **Eleventy** from `src/` into `_site/` (which is git-ignored). Only `_site/` is
+  deployed, so `docs/`, `supabase/`, `reference/`, and `cloudflare-worker.js` stay out of the public bundle.
+- Source structure: `src/_data/site.json` (all content — pricing, amenities, NAP, URLs in one place),
+  `src/_includes/` (base layout + nav + footer), `src/assets/` (css/js), `src/img/`, and one `.njk` file
+  per page. Edit `site.json` once and every page updates.
 - Pages serves over HTTPS automatically.

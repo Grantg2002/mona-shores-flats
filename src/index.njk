@@ -1,0 +1,133 @@
+---
+layout: base.njk
+title: "Apartments near Muskegon, MI | Mona Shores Flats — Norton Shores"
+description: "Brand-new 1–3 bedroom apartments in Norton Shores, MI. Mona Shores schools, Mona Lake access, in-unit laundry, granite, pet friendly. From $1,425/mo. Tour today."
+---
+
+<section class="hero">
+  <div class="hero__media">
+    <img src="/img/building.jpg" alt="Mona Shores Flats apartment building exterior" fetchpriority="high">
+  </div>
+  <div class="hero__inner wrap">
+    <div class="hero__tags">
+      <span class="tag tag--solid">Now Leasing · Muskegon Area</span>
+      <span class="tag tag--ghost">🎉 First Month Free — before April 1st</span>
+    </div>
+    <h1>Brand-new living,<br>steps from Mona Lake.</h1>
+    <p class="hero__sub">1–3 bedroom apartments in Norton Shores — Mona Shores schools, in-unit laundry, granite kitchens, and a private balcony. From $1,425/mo.</p>
+    <div class="hero__actions">
+      <a class="btn btn--light btn--lg" href="/contact/#tour">Schedule a Tour</a>
+      <a class="btn btn--ghost btn--lg" style="color:#fff;border-color:rgba(255,255,255,.5)" href="{{ site.urls.availability }}" target="_blank" rel="noopener">Check Live Availability →</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat__n">2025</div><div class="stat__l">New Construction</div></div>
+  <div class="stat"><div class="stat__n">$1,425</div><div class="stat__l">Starting / mo</div></div>
+  <div class="stat"><div class="stat__n">1 Mo Free</div><div class="stat__l">Before Apr 1st</div></div>
+  <div class="stat"><div class="stat__n">1–3 BR</div><div class="stat__l">Floor Plans</div></div>
+</div>
+
+<!-- Intro -->
+<section class="section">
+  <div class="wrap">
+    <div class="split" data-reveal>
+      <div class="split__media"><img src="/img/living.jpg" alt="Light-filled apartment living room"></div>
+      <div class="stack">
+        <div class="eyebrow">Norton Shores, MI</div>
+        <h2>Five minutes from Muskegon. A short walk from the water.</h2>
+        <div class="points" style="margin-top:18px">
+          <div class="point"><h3>Steps from Mona Lake</h3><p>695 acres connected to Lake Michigan — the park, the shoreline, and the water are your everyday backyard.</p></div>
+          <div class="point"><h3>Mona Shores School District</h3><p>Among the best-rated in West Michigan. Establish your address while you settle in.</p></div>
+          <div class="point"><h3>Everything new in 2025</h3><p>In-unit washer/dryer, granite, stainless, private balcony — move in and live, no surprises.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Floor plans preview -->
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <div class="stack"><div class="eyebrow">Floor Plans</div><h2>Find your fit.</h2></div>
+      <a class="btn btn--ghost" href="/floor-plans/">All floor plans →</a>
+    </div>
+    <div class="grid plans">
+      {% for p in site.floorplans %}
+      <article class="plan" data-reveal>
+        <div class="plan__media"><img src="{{ p.img }}" alt="{{ p.name }} apartment" loading="lazy"></div>
+        <div class="plan__body">
+          <div class="plan__label">{{ p.name }}{% if p.accessible %}<span class="badge">ADA</span>{% endif %}</div>
+          <div class="plan__price">${{ p.price }}<span>/mo · {{ p.sqft }} sq ft</span></div>
+          <div class="plan__meta">{{ p.beds }} bed · {{ p.baths }} bath</div>
+          <div class="plan__foot">
+            <a class="btn btn--accent btn--block" href="{{ site.urls.availability }}" target="_blank" rel="noopener">Check Availability</a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Amenities preview -->
+<section class="section">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <div class="stack"><div class="eyebrow">What's Included</div><h2>No trade-offs.</h2></div>
+      <a class="btn btn--ghost" href="/amenities/">All amenities →</a>
+    </div>
+    <div class="grid amenities">
+      {% for a in site.amenities %}
+      <div class="amenity" data-reveal><div class="amenity__ico">{{ a.icon }}</div><div class="amenity__name">{{ a.name }}</div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Gallery teaser -->
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <div class="stack"><div class="eyebrow">Gallery</div><h2>Take a look inside.</h2></div>
+      <a class="btn btn--ghost" href="/gallery/">View gallery →</a>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr)" data-reveal>
+      {% for g in [site.gallery[1], site.gallery[3], site.gallery[5]] %}
+      <figure style="border-radius:var(--r-md);overflow:hidden;aspect-ratio:4/3"><img src="{{ g.src }}" alt="{{ g.cap }}" loading="lazy" style="width:100%;height:100%;object-fit:cover"></figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta">
+  <div class="wrap stack center">
+    <h2>Units are going fast.</h2>
+    <p>{{ site.special }} Lock in your floor plan now.</p>
+    <div class="cta__actions">
+      <a class="btn btn--light btn--lg" href="/contact/#tour">Schedule a Tour</a>
+      <a class="btn btn--accent btn--lg" href="{{ site.urls.apply }}" target="_blank" rel="noopener">Apply Now →</a>
+    </div>
+  </div>
+</section>
+
+{% block scripts %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ApartmentComplex",
+  "name": "Mona Shores Flats",
+  "url": "{{ site.url }}/",
+  "telephone": "+1-616-737-8592",
+  "image": "{{ site.url }}/img/building.jpg",
+  "numberOfAccommodationUnits": 120,
+  "petsAllowed": true,
+  "yearBuilt": 2025,
+  "address": { "@type": "PostalAddress", "streetAddress": "{{ site.address.street }}", "addressLocality": "{{ site.address.city }}", "addressRegion": "{{ site.address.region }}", "postalCode": "{{ site.address.zip }}", "addressCountry": "US" },
+  "geo": { "@type": "GeoCoordinates", "latitude": {{ site.address.lat }}, "longitude": {{ site.address.lng }} }
+}
+</script>
+{% endblock %}

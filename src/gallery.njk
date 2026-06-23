@@ -1,0 +1,36 @@
+---
+layout: base.njk
+title: "Photo Gallery | Mona Shores Flats"
+description: "Photos of Mona Shores Flats — granite kitchens, open living areas, bedrooms, baths and the brand-new 2025 community in Norton Shores, MI."
+---
+
+<section class="section" style="padding-top:clamp(110px,14vw,180px)">
+  <div class="wrap">
+    <div class="stack" data-reveal>
+      <div class="eyebrow">Gallery</div>
+      <h2>Take a look inside.</h2>
+      <p class="lead">Real photos of our homes and community. Want to see it in person?
+        <a href="/contact/#tour" style="color:var(--accent);font-weight:600">Schedule a tour →</a></p>
+    </div>
+
+    <div class="masonry" style="margin-top:clamp(32px,5vw,48px)">
+      {% for g in site.gallery %}
+      <figure data-reveal>
+        <img src="{{ g.src }}" alt="{{ g.cap }}" loading="lazy">
+        <figcaption>{{ g.cap }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section cta">
+  <div class="wrap stack center">
+    <h2>Like what you see?</h2>
+    <p>{{ site.special }}</p>
+    <div class="cta__actions">
+      <a class="btn btn--light btn--lg" href="/contact/#tour">Schedule a Tour</a>
+      <a class="btn btn--accent btn--lg" href="{{ site.urls.apply }}" target="_blank" rel="noopener">Apply Now →</a>
+    </div>
+  </div>
+</section>

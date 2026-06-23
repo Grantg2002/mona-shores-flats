@@ -2,12 +2,15 @@
   "name": "mona-shores-flats",
   "version": "1.0.0",
   "private": true,
-  "description": "Mona Shores Flats marketing site (Cloudflare Pages) + AI chat Worker",
+  "description": "Mona Shores Flats marketing site (Eleventy + Cloudflare Pages) + AI chat Worker",
   "scripts": {
-    "deploy:site": "wrangler pages deploy public --project-name=mona-shores-flats",
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "deploy:site": "npm run build && wrangler pages deploy _site --project-name=mona-shores-flats",
     "deploy:chat": "wrangler deploy cloudflare-worker.js --name msf-chat"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^3.1.6",
     "wrangler": "^3.90.0"
   }
 }
