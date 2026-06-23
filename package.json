@@ -4,7 +4,7 @@
   "private": true,
   "description": "Mona Shores Flats marketing site (Cloudflare Pages) + AI chat Worker",
   "scripts": {
-    "deploy:site": "wrangler pages deploy . --project-name=mona-shores-flats",
+    "deploy:site": "wrangler pages deploy public --project-name=mona-shores-flats",
     "deploy:chat": "wrangler deploy cloudflare-worker.js --name msf-chat"
   },
   "devDependencies": {

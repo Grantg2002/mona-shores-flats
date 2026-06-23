@@ -17,7 +17,7 @@ every time you push to the branch.
    - **Production branch:** `claude/website-yardi-integration-erxge0` (or `main` after you merge).
    - **Framework preset:** `None`
    - **Build command:** *(leave empty)*
-   - **Build output directory:** `/`  (the site is at the repo root)
+   - **Build output directory:** `public`  (the site lives in `public/`)
 4. **Save and Deploy.**
 
 You'll get a live URL like **`https://mona-shores-flats.pages.dev`** in under a minute. Every future
@@ -34,7 +34,7 @@ npx wrangler login                # opens browser, logs into YOUR Cloudflare acc
 npm run deploy:site               # uploads the current folder to Cloudflare Pages
 ```
 
-`npm run deploy:site` runs `wrangler pages deploy . --project-name=mona-shores-flats`.
+`npm run deploy:site` runs `wrangler pages deploy public --project-name=mona-shores-flats`.
 First run creates the project and prints the `*.pages.dev` URL.
 
 ---
@@ -55,8 +55,6 @@ still works via its scripted flows and keyword matching — only the free-text A
 
 ## Notes
 
-- Deploying the repo root also uploads `docs/`, `supabase/`, and `cloudflare-worker.js` as static files.
-  They're harmless (no secrets are in source — secrets live in Cloudflare/Supabase env), just unused.
-  If you want a clean deploy later, move `index.html` + `img/` into a `public/` folder and set the build
-  output directory to `public`.
+- The site lives in `public/` (just `index.html` + `img/`), so only those assets are deployed — `docs/`,
+  `supabase/`, and `cloudflare-worker.js` stay out of the public bundle.
 - Pages serves over HTTPS automatically.
