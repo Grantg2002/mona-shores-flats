@@ -1,0 +1,13 @@
+{
+  "name": "mona-shores-flats",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mona Shores Flats marketing site (Cloudflare Pages) + AI chat Worker",
+  "scripts": {
+    "deploy:site": "wrangler pages deploy . --project-name=mona-shores-flats",
+    "deploy:chat": "wrangler deploy cloudflare-worker.js --name msf-chat"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  }
+}
