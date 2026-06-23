@@ -1,0 +1,7 @@
+name = "mona-shores-flats"
+compatibility_date = "2025-06-01"
+
+# Static-asset-only Worker: serves the Eleventy build output in _site/
+# (no `main` script needed — Cloudflare serves the files directly)
+[assets]
+directory = "./_site"
