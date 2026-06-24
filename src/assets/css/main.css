@@ -368,6 +368,13 @@ h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); letter-spacing: -0.005em; }
 .acard--plain .acard__label strong { color: var(--ink); }
 .acard--plain .acard__label span { color: var(--muted); }
 
+/* "what's included" — clean cards, no emoji */
+.incl { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: clamp(18px, 3vw, 28px); }
+.incl__item { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-md); padding: 18px; }
+.incl__item strong { display: flex; align-items: center; gap: 9px; font-family: var(--font-display); font-weight: 500; font-size: 1.02rem; }
+.incl__item strong::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex: none; }
+.incl__item span { display: block; color: var(--muted); font-size: .84rem; margin-top: 5px; padding-left: 16px; }
+
 /* "what's included" checklist (photo-less items) */
 .checklist { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 36px; }
 @media (max-width: 720px) { .checklist { grid-template-columns: repeat(2, 1fr); } }

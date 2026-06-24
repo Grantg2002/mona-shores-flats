@@ -10,7 +10,8 @@
   </div>
   <div class="nav__cta">
     <a class="nav__resident" href="{{ site.urls.resident }}" target="_blank" rel="noopener">Resident Login</a>
-    <a class="btn btn--accent" href="/contact/#tour">Schedule a Tour</a>
+    <a class="nav__link nav__link--cta" href="/contact/#tour">Schedule a Tour</a>
+    <a class="btn btn--accent" href="{{ site.urls.apply }}" target="_blank" rel="noopener">Apply Now</a>
     <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -22,5 +23,6 @@
     <a href="{{ item.url }}">{{ item.label }}</a>
   {% endfor %}
   <a href="{{ site.urls.resident }}" target="_blank" rel="noopener">Resident Login</a>
-  <a class="btn btn--accent btn--lg" href="/contact/#tour">Schedule a Tour</a>
+  <a class="btn btn--ghost btn--lg" href="/contact/#tour">Schedule a Tour</a>
+  <a class="btn btn--accent btn--lg" href="{{ site.urls.apply }}" target="_blank" rel="noopener">Apply Now</a>
 </div>

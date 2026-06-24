@@ -11,7 +11,7 @@ description: "Brand-new 1–3 bedroom apartments in Norton Shores, MI. Mona Shor
   <div class="hero__inner wrap">
     <div class="hero__tags">
       <span class="tag tag--solid">Now Leasing · Muskegon Area</span>
-      <span class="tag tag--ghost">🎉 One Month Free — Limited Time</span>
+      <span class="tag tag--ghost">🎉 One Month Free · Summer Move-In Special</span>
     </div>
     <h1>Brand-new living,<br>steps from Mona Lake.</h1>
     <p class="hero__sub">1–3 bedroom apartments in Norton Shores — Mona Shores schools, in-unit laundry, granite kitchens, and a private balcony. From $1,425/mo.</p>
@@ -72,37 +72,14 @@ description: "Brand-new 1–3 bedroom apartments in Norton Shores, MI. Mona Shor
   </div>
 </section>
 
-<!-- Cinematic tour -->
-<section class="section">
-  <div class="wrap">
-    <div class="section__head" data-reveal>
-      <div class="stack"><div class="eyebrow">Take a Look</div><h2>A look inside, in motion.</h2></div>
-      <a class="btn btn--ghost" href="/gallery/">Full gallery →</a>
-    </div>
-    <div class="tour-video" data-reveal>
-      {% if site.tourVideo %}
-      <iframe src="{{ site.tourVideo }}" title="Mona Shores Flats video tour" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-      {% else %}
-      <div class="cinema" aria-hidden="true">
-        <div class="cinema__slide"><img src="/img/living.jpg" alt=""></div>
-        <div class="cinema__slide"><img src="/img/kitchen.jpg" alt=""></div>
-        <div class="cinema__slide"><img src="/img/bedroom.jpg" alt=""></div>
-        <div class="cinema__slide"><img src="/img/building.jpg" alt=""></div>
-      </div>
-      <span class="tour-video__label">▶ Photo tour — a video link drops right in here</span>
-      {% endif %}
-    </div>
-  </div>
-</section>
-
-<!-- Amenities preview -->
+<!-- What's included -->
 <section class="section">
   <div class="wrap">
     <div class="section__head" data-reveal>
       <div class="stack">
         <div class="eyebrow">What's Included</div>
-        <h2>Everything, actually included.</h2>
-        <p class="lead">Granite kitchens, in-unit laundry, a fitness center, pickleball, a dog run and more — in a brand-new 2025 community.</p>
+        <h2>What's included?</h2>
+        <p class="lead">A brand-new 2025 community where the everyday extras come standard. Take a look inside.</p>
       </div>
       <a class="btn btn--ghost" href="/amenities/">All amenities →</a>
     </div>
@@ -112,7 +89,12 @@ description: "Brand-new 1–3 bedroom apartments in Norton Shores, MI. Mona Shor
       <figure class="acard"><img src="/img/laundry.jpg" alt="In-unit washer and dryer" loading="lazy"><figcaption class="acard__label"><strong>In-Unit Laundry</strong><span>Full-size W/D</span></figcaption></figure>
       <figure class="acard"><img src="/img/courtyard.jpg" alt="Private balcony with French doors" loading="lazy"><figcaption class="acard__label"><strong>Private Balconies</strong><span>Off every living area</span></figcaption></figure>
       <figure class="acard"><img src="/img/bathroom.jpg" alt="Granite bathroom vanity" loading="lazy"><figcaption class="acard__label"><strong>Granite Baths</strong><span>Modern fixtures</span></figcaption></figure>
-      <div class="acard acard--plain"><span class="acard__ico">🎾</span><div class="acard__label"><strong>Pickleball &amp; Dog Run</strong><span>Playground · clubhouse</span></div></div>
+      <figure class="acard"><img src="/img/living2.jpg" alt="Open-concept living area" loading="lazy"><figcaption class="acard__label"><strong>Open Living</strong><span>High ceilings · bright</span></figcaption></figure>
+    </div>
+    <div class="incl" data-reveal>
+      {% for c in site.community %}
+      <div class="incl__item"><strong>{{ c.name }}</strong><span>{{ c.note }}</span></div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -122,11 +104,11 @@ description: "Brand-new 1–3 bedroom apartments in Norton Shores, MI. Mona Shor
   <div class="wrap">
     <div class="section__head" data-reveal>
       <div class="stack"><div class="eyebrow">Gallery</div><h2>Take a look inside.</h2></div>
-      <a class="btn btn--ghost" href="/gallery/">View gallery →</a>
+      <a class="btn btn--ghost" href="/gallery/">View full gallery →</a>
     </div>
     <div class="grid" style="grid-template-columns:repeat(3,1fr)" data-reveal>
       {% for g in [site.gallery[1], site.gallery[3], site.gallery[5]] %}
-      <figure style="border-radius:var(--r-md);overflow:hidden;aspect-ratio:4/3"><img src="{{ g.src }}" alt="{{ g.cap }}" loading="lazy" style="width:100%;height:100%;object-fit:cover"></figure>
+      <a href="/gallery/" class="teaser-tile" style="display:block;border-radius:var(--r-md);overflow:hidden;aspect-ratio:4/3"><img src="{{ g.src }}" alt="{{ g.cap }}" loading="lazy" style="width:100%;height:100%;object-fit:cover"></a>
       {% endfor %}
     </div>
   </div>

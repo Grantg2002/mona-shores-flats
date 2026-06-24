@@ -8,8 +8,8 @@ description: "See what's included: granite kitchens, in-unit laundry, fitness ce
   <div class="wrap">
     <div class="stack" data-reveal>
       <div class="eyebrow">What's Included</div>
-      <h2>See exactly what you're getting.</h2>
-      <p class="lead">A brand-new 2025 community — real photos of the finishes and spaces, not a checklist of buzzwords.</p>
+      <h2>What's included?</h2>
+      <p class="lead">A brand-new 2025 community — real photos of the actual finishes and spaces, plus the everyday extras that come standard.</p>
     </div>
 
     <!-- In your home -->
@@ -32,13 +32,13 @@ description: "See what's included: granite kitchens, in-unit laundry, fitness ce
         <figure class="acard"><img src="/img/gym.jpg" alt="On-site fitness center" loading="lazy"><figcaption class="acard__label"><strong>Fitness Center</strong><span>Cardio · strength · Peloton</span></figcaption></figure>
         <figure class="acard"><img src="/img/courtyard.jpg" alt="Private balcony with French doors" loading="lazy"><figcaption class="acard__label"><strong>Private Balconies</strong><span>Off every living area</span></figcaption></figure>
         <figure class="acard"><img src="/img/building.jpg" alt="Mona Shores Flats grounds" loading="lazy"><figcaption class="acard__label"><strong>Landscaped Grounds</strong><span>2025 construction</span></figcaption></figure>
-        <div class="acard acard--plain"><span class="acard__ico">🎾</span><div class="acard__label"><strong>Pickleball Courts</strong><span>On site</span></div></div>
-        <div class="acard acard--plain"><span class="acard__ico">🐕</span><div class="acard__label"><strong>On-Site Dog Run</strong><span>Pet friendly</span></div></div>
-        <div class="acard acard--plain"><span class="acard__ico">🛝</span><div class="acard__label"><strong>Playground</strong><span>For families</span></div></div>
-        <div class="acard acard--plain"><span class="acard__ico">🏛️</span><div class="acard__label"><strong>Resident Clubhouse</strong><span>Gather &amp; relax</span></div></div>
-        <div class="acard acard--plain"><span class="acard__ico">🚗</span><div class="acard__label"><strong>Detached Garages</strong><span>Available to rent</span></div></div>
       </div>
-      <p class="muted" style="font-size:.86rem;margin-top:14px">Photos of the pickleball courts, dog run, playground and clubhouse are coming soon — <a href="/contact/#tour" style="color:var(--accent);font-weight:600">tour to see them in person →</a></p>
+      <div class="incl" data-reveal>
+        {% for c in site.community %}
+        <div class="incl__item"><strong>{{ c.name }}</strong><span>{{ c.note }}</span></div>
+        {% endfor %}
+      </div>
+      <p class="muted" style="font-size:.86rem;margin-top:16px">We're still photographing the pickleball courts, dog run, playground and clubhouse — they're brand new. <a href="/contact/#tour" style="color:var(--accent);font-weight:600">Come see them in person →</a></p>
     </div>
 
     <!-- Everything included -->

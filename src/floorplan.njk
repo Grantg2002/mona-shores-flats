@@ -24,13 +24,14 @@ eleventyComputed:
           <div><dt>Square Feet</dt><dd>{{ plan.sqft }}</dd></div>
         </dl>
         <p class="lead">{{ plan.blurb }}</p>
-        <ul class="plan__features" style="margin-top:18px">
+        <div class="eyebrow" style="margin-top:22px">Room features</div>
+        <ul class="plan__features" style="margin-top:10px">
           {% for f in plan.features %}<li>{{ f }}</li>{% endfor %}
         </ul>
         <div class="fp__actions">
-          <a class="btn btn--accent btn--lg" href="/contact/#tour">Schedule a Tour</a>
+          <a class="btn btn--accent btn--lg" href="{{ site.urls.apply }}" target="_blank" rel="noopener">Apply Now →</a>
           <a class="btn btn--ghost btn--lg" href="{{ site.urls.availability }}" target="_blank" rel="noopener">Check Availability</a>
-          <a class="btn btn--ghost btn--lg" href="{{ site.urls.apply }}" target="_blank" rel="noopener">Apply</a>
+          <a class="btn btn--ghost btn--lg" href="/contact/#tour">Schedule a Tour</a>
         </div>
       </div>
     </div>

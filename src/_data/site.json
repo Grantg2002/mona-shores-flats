@@ -15,7 +15,7 @@
     "lng": -86.2470
   },
   "hours": "Mon–Sat 9am–6pm · Sun by appointment",
-  "special": "One month free — a limited-time move-in offer.",
+  "special": "One month free on summer move-ins — for a limited time.",
   "urls": {
     "apply": "https://monashoresflats.securecafe.com/onlineleasing/mona-shores-flats/guestlogin.aspx",
     "resident": "https://monashoresflats.securecafe.com/residentservices/mona-shores-flats/userlogin.aspx",
@@ -36,18 +36,28 @@
     { "name": "3 Bedroom", "slug": "3-bedroom", "beds": 3, "baths": 2, "sqft": "1,315–1,421", "price": 2085, "img": "/img/living3.jpg", "photos": ["/img/living2.jpg", "/img/kitchen.jpg", "/img/bedroom2.jpg"], "blurb": "Our largest layout — a family-sized three-bedroom, two-bath with extra storage, two full baths, and an open living and dining space.", "features": ["Family-sized layout", "Two full bathrooms", "In-unit washer & dryer", "Extra storage", "Private balcony or patio"] }
   ],
   "amenities": [
-    { "icon": "🫧", "name": "In-Unit Washer & Dryer" },
-    { "icon": "🍽️", "name": "Dishwasher" },
-    { "icon": "✦", "name": "Granite Countertops" },
-    { "icon": "🌿", "name": "Private Balcony or Patio" },
-    { "icon": "❄️", "name": "Central A/C & Heat" },
-    { "icon": "🏋️", "name": "Fitness Center" },
-    { "icon": "🎾", "name": "Pickleball Courts" },
-    { "icon": "🐕", "name": "On-Site Dog Run" },
-    { "icon": "🛝", "name": "Playground" },
-    { "icon": "🏛️", "name": "Resident Clubhouse" },
-    { "icon": "🚗", "name": "Detached Garages" },
-    { "icon": "✨", "name": "2025 New Construction" }
+    { "name": "Brand-new 2025 construction" },
+    { "name": "Espresso bar in the community room" },
+    { "name": "Fitness center" },
+    { "name": "Pickleball courts" },
+    { "name": "On-site dog run" },
+    { "name": "Playground" },
+    { "name": "Resident clubhouse" },
+    { "name": "Detached garages" },
+    { "name": "In-unit washer & dryer" },
+    { "name": "Dishwasher" },
+    { "name": "Granite countertops" },
+    { "name": "Private balcony or patio" },
+    { "name": "Central A/C & heat" }
+  ],
+  "community": [
+    { "name": "Espresso bar", "note": "in the resident community room" },
+    { "name": "Fitness center", "note": "cardio, strength & Peloton" },
+    { "name": "Pickleball courts", "note": "on site" },
+    { "name": "On-site dog run", "note": "pet friendly" },
+    { "name": "Playground", "note": "for families" },
+    { "name": "Resident clubhouse", "note": "gather & relax" },
+    { "name": "Detached garages", "note": "available to rent" }
   ],
   "gallery": [
     { "src": "/img/building.jpg", "cap": "2025 new construction · Norton Shores", "cat": "Exterior" },
