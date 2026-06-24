@@ -43,6 +43,8 @@ document.querySelectorAll('[data-funnel]').forEach((root) => {
     lead.lastName = (root.querySelector('[name=lastName]').value || '').trim();
     lead.phone = (root.querySelector('[name=phone]').value || '').trim();
     lead.email = (root.querySelector('[name=email]').value || '').trim();
+    const bedSel = root.querySelector('[name=bedrooms]');
+    if (bedSel && bedSel.value) lead.bedrooms = bedSel.value;
 
     if (!lead.firstName) { root.querySelector('[name=firstName]').focus(); return; }
     if (lead.phone.replace(/\D/g, '').length < 10) { root.querySelector('[name=phone]').focus(); return; }
