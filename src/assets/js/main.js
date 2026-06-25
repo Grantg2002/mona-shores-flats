@@ -1,9 +1,14 @@
-// ---- Nav: solidify on scroll ----
+// ---- Nav: solidify on scroll. Pages without a dark hero (everything but the
+//      homepage) stay solid so the nav is always readable. ----
 const nav = document.getElementById('nav');
 if (nav) {
-  const onScroll = () => nav.classList.toggle('is-solid', window.scrollY > 40);
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
+  if (!document.querySelector('.hero')) {
+    nav.classList.add('is-solid');
+  } else {
+    const onScroll = () => nav.classList.toggle('is-solid', window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
 }
 
 // ---- Mobile menu ----

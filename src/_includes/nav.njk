@@ -5,7 +5,8 @@
   </a>
   <div class="nav__links">
     {% for item in site.nav %}
-      <a class="nav__link" href="{{ item.url }}">{{ item.label }}</a>
+      {% set isActive = item.url != "/" and item.url in page.url %}
+      <a class="nav__link" href="{{ item.url }}"{% if isActive %} aria-current="page"{% endif %}>{{ item.label }}</a>
     {% endfor %}
   </div>
   <div class="nav__cta">
@@ -20,7 +21,8 @@
 
 <div class="mobile-menu" id="mobileMenu">
   {% for item in site.nav %}
-    <a href="{{ item.url }}">{{ item.label }}</a>
+    {% set isActive = item.url != "/" and item.url in page.url %}
+    <a href="{{ item.url }}"{% if isActive %} aria-current="page"{% endif %}>{{ item.label }}</a>
   {% endfor %}
   <a href="{{ site.urls.resident }}" target="_blank" rel="noopener">Resident Login</a>
   <a class="btn btn--ghost btn--lg" href="/contact/#tour">Schedule a Tour</a>
