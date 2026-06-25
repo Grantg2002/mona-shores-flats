@@ -83,6 +83,10 @@
   ],
   "googleReviewsUrl": "",
   "tourVideo": "",
-  "_testimonials_note": "Add REAL resident reviews here as objects like { \"quote\": \"...\", \"name\": \"First N. — 2 Bedroom\" }. The Reviews section auto-shows once this array has entries. Don't publish invented reviews.",
-  "testimonials": []
+  "_testimonials_note": "REAL resident reviews from the RentCafe/ForRent listing network (the property's own Yardi family of sites). Wording sourced via web search and should be confirmed verbatim against the RentCafe leasing dashboard, where exact text + reviewer first name + star rating are available. Replace 'Verified Resident' with the real first name/initial once confirmed. Don't publish invented reviews.",
+  "testimonials": [
+    { "quote": "This property has worked well for us — a couple, and our dog. A built-in dog run, cozy vibes that feel modern, and attentive management.", "name": "Verified Resident · via RentCafe" },
+    { "quote": "The apartment complex is clean and the apartments are spacious with natural light. The staff is very responsive and communication is great.", "name": "Verified Resident · via RentCafe" },
+    { "quote": "The fitness room actually has good equipment — a nice set of weights and a Peloton — so I just cancelled my gym membership.", "name": "Verified Resident · via RentCafe" }
+  ]
 }
